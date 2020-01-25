@@ -3,4 +3,5 @@ include 'liquibase'
 include 'authService'
 include 'deviceService'
 include 'scenarioService'
+include 'webService'
 
