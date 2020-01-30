@@ -4,4 +4,8 @@ include 'authService'
 include 'deviceService'
 include 'scenarioService'
 include 'webService'
+include 'restServiceOut'
+include 'restServiceIn'
+include 'telegramNotifyService'
+include 'smsNotifyService'
 
