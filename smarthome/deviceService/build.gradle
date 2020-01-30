@@ -1,6 +1,8 @@
 plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
-    id "org.springframework.boot" version "2.2.4.RELEASE"
+    id 'idea'
 }
 
 group 'ru.innopolis.stc20'
@@ -15,6 +17,9 @@ repositories {
 
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'net.devh:grpc-server-spring-boot-starter:2.6.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

@@ -14,11 +14,11 @@ message users {
     repeated UserDetail user = 1;
 }
 
-message user{
+message user {
     string name=1;
 }
 
 
-service UserService {
+service authService {
     rpc authUser(UserDetail) returns (user);
 }

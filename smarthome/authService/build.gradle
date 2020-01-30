@@ -20,10 +20,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
-    compile 'net.devh:grpc-spring-boot-starter:2.2.1.RELEASE'
-    compile "io.grpc:grpc-stub:1.0.1"
-    compile "io.grpc:grpc-protobuf:1.0.1"
-    compile "io.grpc:grpc-netty:1.0.1"
-    compile "org.lognet:grpc-spring-boot-starter:0.0.6"
-    compile "org.springframework.boot:spring-boot-devtools:*"
+//    compile 'net.devh:grpc-spring-boot-starter:2.2.1.RELEASE'
+//    compile "io.grpc:grpc-stub:1.0.1"
+//    compile "io.grpc:grpc-protobuf:1.0.1"
+//    compile "io.grpc:grpc-netty:1.0.1"
+//    compile "org.lognet:grpc-spring-boot-starter:0.0.6"
+//    compile "org.springframework.boot:spring-boot-devtools:*"
 }
