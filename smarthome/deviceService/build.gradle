@@ -22,4 +22,5 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 }

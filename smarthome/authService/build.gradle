@@ -19,7 +19,7 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     testCompile('org.springframework.boot:spring-boot-starter-test')
-
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 //    compile 'net.devh:grpc-spring-boot-starter:2.2.1.RELEASE'
 //    compile "io.grpc:grpc-stub:1.0.1"
 //    compile "io.grpc:grpc-protobuf:1.0.1"
