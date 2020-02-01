@@ -9,7 +9,4 @@ public class MqttServiceApp {
         public static void main(String[] args) {
             SpringApplication.run(MqttServiceApp.class, args);
         }
-
-
-
 }
