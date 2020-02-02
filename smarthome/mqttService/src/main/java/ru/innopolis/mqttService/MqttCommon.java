@@ -21,18 +21,16 @@ public class MqttCommon {
         client.subscribe("iot_data");
     }
 
-    public void publisher(String messageString,String host, int port) throws MqttException {
-
+    public void publisher(String host, int port,String iotData,String messageString) throws MqttException {
         //System.out.println("== START PUBLISHER ==");
-        //"tcp://localhost:1883
         MqttClient client = new MqttClient("tcp://"+host+":"+port+"", MqttClient.generateClientId());
         client.connect();
         MqttMessage message = new MqttMessage();
         message.setPayload(messageString.getBytes());
-        client.publish("iot_data", message);
-        logger.info("\tMessage '"+ messageString +"' to 'iot_data'");
+        client.publish(iotData, message);
+        logger.info("\tMessage '"+ messageString +" to "+iotData+"");
         client.disconnect();
-
         //System.out.println("== END PUBLISHER ==");
     }
+
 }
