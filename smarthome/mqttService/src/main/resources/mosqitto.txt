@@ -1,0 +1,5 @@
+1) run mosquitto on router
+2) add device to mosqito
+3) install mosqito on device
+4) mosquitto_pub -h 192.168.1.1 -t cmnd/DVES_5E1089/power -m (0 - off\1 - on)
+5) mosquitto_sub -h 192.168.1.1 -t stat/DVES_5E1089/POWER -v (status)
