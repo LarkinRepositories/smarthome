@@ -4,7 +4,10 @@ import com.twilio.Twilio;
 import com.twilio.exception.TwilioException;
 import com.twilio.type.PhoneNumber;
 import com.twilio.rest.api.v2010.account.Message;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import ru.innopolis.sms.pojo.SMS;
 
 /**
@@ -13,9 +16,14 @@ import ru.innopolis.sms.pojo.SMS;
  */
 @Service
 public class SMSServiceTwilio implements  SMSService {
-    public static final String ACCOUNT_SID = "AC1a288ab3041952604727352e3aXXXXXX";
-    public static final String AUTH_TOKEN = "b6621050b638c303447f887648YYYYYY";
-    private static final String FROM_NUMBER = "+18502702772";//Номер телефона Twilio
+    @Value("#{systemEnvironment['TWILIO_ACCOUNT_SID']}")
+    private String ACCOUNT_SID;
+
+    @Value("#{systemEnvironment['TWILIO_AUTH_TOKEN']}")
+    private String AUTH_TOKEN;
+
+    @Value("#{systemEnvironment['TWILIO_PHONE_NUMBER']}")
+    private String FROM_NUMBER;//Номер телефона Twilio
 
     @Override
     public void sendSMS(SMS sms) {
