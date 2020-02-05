@@ -8,4 +8,4 @@ include 'restServiceOut'
 include 'restServiceIn'
 include 'telegramNotifyService'
 include 'smsNotifyService'
-
+include 'mqttService'
