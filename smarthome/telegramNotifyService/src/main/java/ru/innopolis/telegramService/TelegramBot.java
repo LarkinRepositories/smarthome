@@ -2,6 +2,7 @@ package ru.innopolis.telegramService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,12 +26,14 @@ import java.util.Collections;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
-
+    @Value("#{systemEnvironment['SMART_TELEGRAM_TOKEN']}")
+    private String telegramToken;
 
     @Override
     public void onUpdateReceived(Update update) {
+        //TODO: Добавить очередь входящих, вытащить обработку из Bot'а в отдельный Runnable.
         if (update.hasMessage() && update.getMessage().hasText()) {
-            sendNotificationToChatId(update.getMessage().getText());
+            //sendNotificationToChatId(update.getMessage().getText());
         }
 
         if (update.hasMessage() && update.getMessage().hasText() && update.getMessage().getText().equals("/start")) {
@@ -72,9 +75,11 @@ public class TelegramBot extends TelegramLongPollingBot {
      *
      * @param notify
      */
-    public void sendNotificationToChatId(String notify) {
+    //TODO: Добавить очередь исходящих, вытащить обработку из Bot'а в отдельный Runnable.
+    public void sendNotificationToChatId(String notify, Long chatId) {
         SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
-                .setChatId(524594292l)
+                // .setChatId(524594292l)
+                .setChatId(chatId)
                 .setText(notify);
         try {
             execute(message); // Call method to send the message
@@ -93,8 +98,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        System.getProperty("SMART_HOME_BOT");
-        return "983551610:AAHC3sWPcDVqEC0VQpWvlAY3-13J3KzM_Qs";
+        return telegramToken;
     }
 
     public void setKeyboardForRequestContact(SendMessage message) {
