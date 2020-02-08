@@ -10,3 +10,5 @@ include 'telegramNotifyService'
 include 'smsNotifyService'
 include 'smsSendService'
 include 'mqttService'
+include 'eureka'
+
