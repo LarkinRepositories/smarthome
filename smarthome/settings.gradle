@@ -11,4 +11,5 @@ include 'smsNotifyService'
 include 'smsSendService'
 include 'mqttService'
 include 'eureka'
+include 'gateway'
 
