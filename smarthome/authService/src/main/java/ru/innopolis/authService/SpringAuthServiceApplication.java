@@ -1,15 +1,13 @@
 package ru.innopolis.authService;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-public class GrpcSpringBootServerApplication {
-
-
+@EnableEurekaClient
+public class SpringAuthServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GrpcSpringBootServerApplication.class, args);
+        SpringApplication.run(SpringAuthServiceApplication.class, args);
     }
-
 }
