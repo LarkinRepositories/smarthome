@@ -5,16 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.innopolis.telegramService.service.MessageReciever;
+import ru.innopolis.telegramService.service.MessageSender;
 
-import java.util.Collections;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Класс TelegramBot
@@ -26,69 +25,46 @@ import java.util.Collections;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     private static final Logger log = LoggerFactory.getLogger(TelegramBot.class);
+
     @Value("#{systemEnvironment['SMART_TELEGRAM_TOKEN']}")
     private String telegramToken;
 
+    public final Queue<BotApiMethod<Message>> sendQueue = new ConcurrentLinkedQueue<>();
+    public final Queue<Update> receiveQueue = new ConcurrentLinkedQueue<>();
+
+    public TelegramBot() {
+        MessageSender messageSender = new MessageSender(this);
+        Thread sender = new Thread(messageSender);
+        sender.setDaemon(true);
+        sender.setName("MsgSender");
+        sender.setPriority(1);
+        sender.start();
+        MessageReciever messageReciever = new MessageReciever(this);
+        Thread reciever = new Thread(messageReciever);
+        reciever.setDaemon(true);
+        reciever.setName("MsgReciever");
+        reciever.setPriority(3);
+        reciever.start();
+    }
+
     @Override
     public void onUpdateReceived(Update update) {
-        //TODO: Добавить очередь входящих, вытащить обработку из Bot'а в отдельный Runnable.
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            //sendNotificationToChatId(update.getMessage().getText());
-        }
-
-        if (update.hasMessage() && update.getMessage().hasText() && update.getMessage().getText().equals("/start")) {
-            Long chatId = update.getMessage().getChatId();
-
-            SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
-                    .setChatId(chatId)
-                    .setText("номер телефона?");
-            setKeyboardForRequestContact(message);
-
-            try {
-                execute(message); // Call method to send the message
-
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-        // Check that update has a message and the message has contact
-        if (update.hasMessage() && update.getMessage().hasContact()) {
-            Message message = update.getMessage();
-            Contact contact = message.getContact();
-
-            if (!contact.getUserID().equals(message.getFrom().getId())) {
-                //todo несовпадение контактов, надо прервать обработку
-            }
-
-            String phoneNumber = contact.getPhoneNumber();
-            log.info("номер телефона " + phoneNumber + message.getChatId());
-            log.info(update.getMessage().getContact().toString());
-
-            //todo проверить номер телефона в базе, сохранить chat id в пользователя authService
-
-
-        }
+        log.info("Receive new Update. updateID: " + update.getUpdateId());
+        receiveQueue.add(update);
     }
 
     /**
-     * Произвольное notification в чат id
+     * Произвольное text-notify
      *
      * @param notify
+     * @param chatId
      */
-    //TODO: Добавить очередь исходящих, вытащить обработку из Bot'а в отдельный Runnable.
+
     public void sendNotificationToChatId(String notify, Long chatId) {
         SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
-                // .setChatId(524594292l)
                 .setChatId(chatId)
                 .setText(notify);
-        try {
-            execute(message); // Call method to send the message
-
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-
-
+        sendQueue.add(message);
     }
 
     @Override
@@ -98,20 +74,9 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
+        log.debug("Bot token: " + telegramToken);
         return telegramToken;
     }
 
-    public void setKeyboardForRequestContact(SendMessage message) {
-        KeyboardButton kb = new KeyboardButton().setText("Вот он!");
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setSelective(true);
-        replyKeyboardMarkup.setResizeKeyboard(true);
 
-        KeyboardRow keyboardRow = new KeyboardRow();
-        keyboardRow.add(new KeyboardButton().setText("Пожалуйста").setRequestContact(true));
-        replyKeyboardMarkup.setKeyboard(Collections.singletonList(keyboardRow));
-        replyKeyboardMarkup.setOneTimeKeyboard(true);
-        message.setReplyMarkup(replyKeyboardMarkup);
-    }
 }
