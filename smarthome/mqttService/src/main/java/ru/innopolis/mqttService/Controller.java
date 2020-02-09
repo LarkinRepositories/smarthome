@@ -10,35 +10,47 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    public static final Logger logger = LoggerFactory.getLogger(Controller.class);
+    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
 
-    @RequestMapping("/on")
-    public String on()  {
-        mqtt(true,"DVES_5E1089");
+    @RequestMapping("/MqttOn")
+    public String mqttOn()  {
+        mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
         return "on device";
     }
 
-    @RequestMapping("/off")
-    public String off()  {
-        mqtt(false,"DVES_5E1089");
+    @RequestMapping("/MqttoOf")
+    public String mqttOff()  {
+        mqttPub("192.168.1.1",1883,false,"DVES_5E1089");
         return "off device";
     }
 
-    public void mqtt(Boolean isOn,String device) {
+    public void mqttPub(String host, int port, Boolean isOn, String device) {
         MqttCommon mqttCommon = new MqttCommon();
-        String message = "";
+        String message;
         try {
-            if (isOn == true) {
+            if (isOn) {
                 message = "1";
             } else {
                 message = "0";
             }
 
             String iotData = "cmnd/"+device+"/power";
-            mqttCommon.publisher("192.168.1.1",1883,iotData,message);
+            mqttCommon.publisher(host,port,iotData,message);
         } catch (MqttException e) {
             logger.error(String.valueOf(e));
         }
+    }
+
+    public void mqttSub(String host, int port, Boolean isOn, String device) {
+        MqttCommon mqttCommon = new MqttCommon();
+            String iotData = "iotData";
+        try {
+            mqttCommon.subscriber(host,port,iotData);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        //   mqttCommon.publisher(host,port,iotData,message);
+
     }
 
 }

@@ -13,22 +13,22 @@ public class MqttCommon {
 
     private static Logger logger = LogManager.getLogger(SimpleMqttCallBack.class);
 
-    public void subscriber(String host, int port) throws MqttException {
-        MqttClient client=new MqttClient("tcp://"+host+":"+String.valueOf(port)+"", MqttClient.generateClientId());
-        client.setCallback( new SimpleMqttCallBack() );
+    void subscriber(String host, int port, String iotData) throws MqttException {
+        MqttClient client = new MqttClient("tcp://" + host + ":" + String.valueOf(port) + "", MqttClient.generateClientId());
+        client.setCallback(new SimpleMqttCallBack());
         client.connect();
-
-        client.subscribe("iot_data");
+        logger.info("subscribe to " + "tcp://" + host + ":" + String.valueOf(port) + "with topic - " + iotData);
+        client.subscribe(iotData);
     }
 
-    public void publisher(String host, int port,String iotData,String messageString) throws MqttException {
+    void publisher(String host, int port, String iotData, String messageString) throws MqttException {
         //System.out.println("== START PUBLISHER ==");
-        MqttClient client = new MqttClient("tcp://"+host+":"+port+"", MqttClient.generateClientId());
+        MqttClient client = new MqttClient("tcp://" + host + ":" + port + "", MqttClient.generateClientId());
         client.connect();
         MqttMessage message = new MqttMessage();
         message.setPayload(messageString.getBytes());
         client.publish(iotData, message);
-        logger.info("\tMessage '"+ messageString +" to "+iotData+"");
+        logger.info("\tMessage '" + messageString + " to " + iotData + "");
         client.disconnect();
         //System.out.println("== END PUBLISHER ==");
     }
