@@ -1,0 +1,27 @@
+package ru.innopolis.authService.model;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name="users")
+@Data
+public class User extends BaseEntity {
+    @Column(name = "username")
+    private String username;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
+//    @Column(name = "chat_id")
+//    private long chatId;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+//    private List<Object> devices;
+}
