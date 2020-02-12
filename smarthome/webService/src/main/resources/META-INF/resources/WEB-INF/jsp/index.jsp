@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <script type="text/javascript" src="/resources/js/app.js"></script>
+    <link rel="stylesheet" href="/web/resources/css/style.css">
+    <script type="text/javascript" src="/web/resources/js/app.js"></script>
 
     <title>SmartHome</title>
 </head>
