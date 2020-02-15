@@ -20,6 +20,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.29'
     implementation 'javax.servlet:jstl'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2.2.1.RELEASE'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
