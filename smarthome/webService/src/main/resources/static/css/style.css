@@ -1,7 +1,107 @@
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.0625rem solid #e5e5e5;
+    z-index: 5;
+}
+.header .header-bottom {
+    width: 100%;
+    height: 5rem;
+}
+.header .header-bottom-content {
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.78125rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+.header .header-bottom .header-left, .header .header-bottom .header-right {
+    flex: 1;
+    display: flex;
+}
 .form{
-    background-color: brown;
+    background-color: blueviolet;
     width: 400px;
-    height: 50px;
+    height: 150px;
     border-radius: 7px;
     padding: 20px;
+}
+html,body {
+    margin:0;
+    padding:0;
+/*body, input, button {*/
+    font-family: "Century Gothic Std", Arial, sans-serif;
+    margin: 0;
+}
+
+/*header {*/
+/*    border-top: 4px solid #706c61;*/
+/*    background-color: #34302d;*/
+/*    overflow:hidden;*/
+/*    height: 70px;*/
+/*}*/
+.container{
+    /*height: 100%;*/
+    /*display: flex;*/
+    position: relative;
+    width: 100%;
+    z-index: 4;
+    box-sizing: border-box;
+    height: 50px;
+}
+.container > .navitem {
+    height:100%;
+    flex: 1;
+    display: inline-flex;
+}
+.navitem:hover{
+    /*background: #706c61;*/
+}
+.main{
+    height: 100px;
+    /*background-color: #706c61;*/
+}
+.icon{
+    height: 25px;
+    /*display: flex;*/
+}
+#exit{
+    background-image: url("/static/img/home.png");
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+#logo {
+    float:left;
+    width:calc(100% - 50px);
+    max-width:280px;
+    height:40px;
+    background-image:url("img/home.png");
+    background-repeat:no-repeat;
+    background-size:100%;
+}
+nav {
+    float:right;
+}
+.navitem {
+    color:#999;
+    font-family:Helvetica;
+    font-size:16px;
+    /*margin-left:5px;*/
+    text-decoration:none;
+    font-weight:bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+    align-items: center;
+}
+.navitem:first-child {
+    margin-left:0px;
+}
+.navitem:hover {
+    color:white;
 }

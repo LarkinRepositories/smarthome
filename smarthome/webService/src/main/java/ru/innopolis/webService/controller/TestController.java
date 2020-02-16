@@ -4,11 +4,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.http.HttpClient;
+
 @RestController
 public class TestController {
 
     @GetMapping("/")
     public ModelAndView index(){
+
         return new ModelAndView("login");
     }
 //    @GetMapping("/")
@@ -20,6 +23,7 @@ public class TestController {
     public ModelAndView  sayHello(@RequestParam("name") String name, Model model){
      //   model.addAllAttributes(new HashMap<>())
         model.addAttribute("name", name);
+
         return new ModelAndView("main");
     }
 //    @PostMapping("/hello")
