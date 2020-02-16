@@ -3,7 +3,7 @@ package ru.innopolis.authService.config;
 import org.springframework.beans.factory.annotation.Value;
 
 public class JwtConfig {
-    @Value("${security.jwt.uri:/auth/**}")
+    @Value("${security.jwt.uri:/api/auth/**}")
     private String Uri;
 
     @Value("${security.jwt.header:Authorization}")
