@@ -2,28 +2,74 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-<changeSet id="1.0.0" author="larkinds">
-    <createTable tableName="devices">
-        <column name="id" type="BIGINT" autoIncrement="true">
-            <constraints primaryKey="true" nullable="false" />
-        </column>
-        <column name = "name" type="VARCHAR(100)">
-            <constraints nullable="false" unique="true" />
-        </column>
-        <column name="created" type="TIMESTAMP" defaultValue="now()">
-            <constraints nullable="false" />
-        </column>
-        <column name = "updated" type="TIMESTAMP" defaultValue="now()">
-            <constraints nullable="false" />
-        </column>
-        <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
-            <constraints nullable="false" />
-        </column>
-    </createTable>
-</changeSet>
-<changeSet id="1.0.1" author="larkinds">
-    <createTable tableName="">
-        <column></column>
-    </createTable>
-</changeSet>    
+    <changeSet id="1.0.0" author="larkinds">
+        <createTable tableName="devices">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name = "name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="created" type="TIMESTAMP" defaultValue="now()">
+                <constraints nullable="false" />
+            </column>
+            <column name = "updated" type="TIMESTAMP" defaultValue="now()">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.1" author="larkinds">
+        <createTable tableName="types">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="created" type="TIMESTAMP" defaultValue="now()">
+                <constraints nullable="false" />
+            </column>
+            <column name="updated" type="TIMESTAMP" defaultValue="now()">
+                <constraints nullable="false" />
+            </column>
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.2" author="larkinds">
+        <createTable tableName="device_types">
+            <column name="device_id" type="BIGINT"/>
+            <column name="type_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.3" author="larkinds">
+        <addForeignKeyConstraint baseTableName="device_id"
+                                 baseColumnNames="device_types"
+                                 constraintName="fk_device_types_device"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="devices"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet id="1.0.4" author="larkinds">
+        <addForeignKeyConstraint baseTableName="type_id"
+                                 baseColumnNames="device_types"
+                                 constraintName="fk_device_types_type"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedTableName="types"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet id="1.0.5" author="larkinds">
+        <insert tableName="types">
+            <column name="name" value="REST_DEVICE" />
+        </insert>
+        <insert tableName="types">
+            <column name="name" value="MQTT_DEVICE"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

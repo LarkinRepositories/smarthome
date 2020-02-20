@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 public class BaseEntity {
     @Id

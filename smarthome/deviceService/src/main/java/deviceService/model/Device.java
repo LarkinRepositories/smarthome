@@ -2,6 +2,8 @@ package deviceService.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @Table(name = "devices")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Device extends BaseEntity {
     @Column(name = "name")
     private String aliasName;
@@ -22,6 +25,6 @@ public class Device extends BaseEntity {
             joinColumns = {@JoinColumn(name = "device_id", referencedColumnName = "id") },
             inverseJoinColumns = {@JoinColumn(name = "type_id", referencedColumnName = "id")})
     private List<Type> types;
-
+//    @Transient
 //    private List<Object> scenarios;
 }
