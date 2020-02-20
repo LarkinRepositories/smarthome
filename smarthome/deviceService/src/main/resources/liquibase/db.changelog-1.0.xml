@@ -10,6 +10,12 @@
             <column name = "name" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" />
             </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" unique="false" />
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
             <column name="created" type="TIMESTAMP" defaultValue="now()">
                 <constraints nullable="false" />
             </column>
@@ -47,8 +53,8 @@
         </createTable>
     </changeSet>
     <changeSet id="1.0.3" author="larkinds">
-        <addForeignKeyConstraint baseTableName="device_id"
-                                 baseColumnNames="device_types"
+        <addForeignKeyConstraint baseTableName="device_types"
+                                 baseColumnNames="device_id"
                                  constraintName="fk_device_types_device"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
@@ -56,8 +62,8 @@
                                  referencedColumnNames="id" />
     </changeSet>
     <changeSet id="1.0.4" author="larkinds">
-        <addForeignKeyConstraint baseTableName="type_id"
-                                 baseColumnNames="device_types"
+        <addForeignKeyConstraint baseTableName="device_types"
+                                 baseColumnNames="type_id"
                                  constraintName="fk_device_types_type"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"

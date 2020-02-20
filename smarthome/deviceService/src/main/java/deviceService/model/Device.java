@@ -20,11 +20,11 @@ public class Device extends BaseEntity {
     private long userId;
     @Column(name = "token")
     private String token;
-    @ManyToMany
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "device_types",
-            joinColumns = {@JoinColumn(name = "device_id", referencedColumnName = "id") },
+            joinColumns = {@JoinColumn(name = "device_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "type_id", referencedColumnName = "id")})
-    private List<Type> types;
+    private Type type;
 //    @Transient
 //    private List<Object> scenarios;
 }

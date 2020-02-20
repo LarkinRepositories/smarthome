@@ -27,9 +27,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device addDevice(Device device) {
-        Type deviceType = typeRepository.findByName("DEVICE");
-        List<Type> deviceTypes = new ArrayList<>();
-        deviceTypes.add(deviceType);
+        Type deviceType = typeRepository.findByName("REST_DEVICE");
+        device.setType(deviceType);
+        device.setToken("NEW_TOKEN");
         device.setStatus(Status.ACTIVE);
         Device registeredDevice = deviceRepository.save(device);
         log.info("IN addDevice - device {} successfully registered", registeredDevice);
