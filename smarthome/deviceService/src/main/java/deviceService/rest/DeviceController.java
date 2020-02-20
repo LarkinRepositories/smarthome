@@ -1,15 +1,11 @@
 package deviceService.rest;
 
 import deviceService.model.Device;
-import deviceService.repository.DeviceRepository;
+import deviceService.model.Status;
 import deviceService.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -34,12 +30,21 @@ public class DeviceController {
 //       /List<Device> devices = Arrays.asList(new Device(1, "TOKEN1", Collections.emptyList()), new Device(1, "TOKEN2", Collections.emptyList()));
 //       return devices;
 //    }
-
     @GetMapping("/devices/")
     @LoadBalanced
     public List<Device> getDevices(@RequestParam(name = "userId") Long userId) {
         List<Device> devices = deviceService.findByUserId(userId);
         return devices;
+    }
+
+    @PostMapping("/devices/add/")
+    public void addDevice(@RequestParam(name="alias")String alias,@RequestParam(name="userid") long userid) {
+        Device device = new Device();
+        device.setAliasName(alias);
+        device.setUserId(userid);
+        device.setToken("SOME TOKEN");
+        device.setStatus(Status.ACTIVE);
+        deviceService.addDevice(device);
     }
 
 //    @PostMapping("/devices/?remove={id}")
