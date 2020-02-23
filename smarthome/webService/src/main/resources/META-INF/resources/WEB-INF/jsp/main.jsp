@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/style.css">
     <script type="text/javascript" src="/resources/js/app.js"></script>
     <title>SmartHome</title>
 </head>
@@ -13,12 +14,13 @@
         <div class="header-bottom">
             <div class="header-bottom-content">
                 <div class="header-left">
-                    left(burger-menu)
+<%--                    left-menu-element --%>
                 </div>
-                <div class="header-center">
-                    <a class="logo" aria-label="aria_goToHome" href="/ru_ru">
-                        <img class="icon" src="/resources/img/house.png"/>
+                <div class="header-center"> SMART
+                    <a class="logo" aria-label="aria_goToHome">
+                        <img class="icon" src="resources/img/house.png"/>
                     </a>
+                    HOME
                 </div>
                 <div class="header-right">
                 </div>
@@ -27,10 +29,10 @@
     </header>
     <div class='main'>
         <nav class="container">
-            <div href="#" class="navitem">Сценарии</div>
-            <div href="#" class="navitem">Устройства</div>
-            <div href="#" class="navitem">Профиль</div>
-            <div id="exit" href="#" class="navitem">LOGOUT (${name})</div>
+            <div class="navitem" onclick="location.href='/web/scenarios'" value="scenarios" >Сценарии</div>
+            <div class="navitem" onclick="location.href='/web/devices'" value="devices" >Устройства</div>
+            <div class="navitem" onclick="location.href='/web/profile'" >Профиль</div>
+            <div class="navitem" onclick="location.href='/web/exit'" >LOGOUT (${name})</div>
         </nav>
 
         <form action="hello" method="post" onsubmit="return validate()">

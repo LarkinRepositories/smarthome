@@ -8,7 +8,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses=ru.innopolis.webService.controller.TestController.class)
+//@ComponentScan(basePackageClasses=ru.innopolis.webService.controller.TestController.class)
 @EnableEurekaClient
 public class WebServiceApplication  extends SpringBootServletInitializer {
 
