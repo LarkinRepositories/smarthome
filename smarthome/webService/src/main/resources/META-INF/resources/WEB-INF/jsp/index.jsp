@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%--<head>--%>
+<%--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
 
-    <link rel="stylesheet" href="/web/resources/css/style.css">
-    <script type="text/javascript" src="/web/resources/js/app.js"></script>
+<%--    <link rel="stylesheet" href="/web/resources/css/style.css">--%>
+<%--    <script type="text/javascript" src="/web/resources/js/app.js"></script>--%>
 
-    <title>SmartHome</title>
-</head>
+<%--    <title>SmartHome</title>--%>
+<%--</head>--%>
 
 <body>
 <h1>SmartHome web application</h1>

@@ -13,17 +13,19 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">STC20 Smart Home Login</h1>
+            <h1 class="text-center login-title">Smart Home Login</h1>
             <div class="account-wall">
                 <center><img class="profile-img"
                              src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                              alt=""></center>
-                <form action="main" method="post" onsubmit="return validate()">
-                    <input id="name" type="text" class="form-control" name="name"  placeholder="User"
+                <form action="auth-form" method="post" onsubmit="return validate()">
+                    <input id="name" type="text" class="form-control" name="name" placeholder="User"
                            required autofocus> <input name="password" type="password"
                                                       class="form-control" placeholder="Password" required>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">
-                        Login</button>
+                    <input type="submit" value="Login">
+<%--                    <button class="btn btn-lg btn-primary btn-block" type="submit">--%>
+<%--                        Login--%>
+<%--                    </button>--%>
                 </form>
             </div>
         </div>
