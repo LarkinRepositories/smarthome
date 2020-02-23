@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class Controller {
-    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
+public class MqttController {
+    private static final Logger logger = LoggerFactory.getLogger(MqttController.class);
 
     @RequestMapping("/MqttOn")
     public String mqttOn()  {
@@ -18,7 +18,7 @@ public class Controller {
         return "on device";
     }
 
-    @RequestMapping("/MqttoOf")
+    @RequestMapping("/MqttOff")
     public String mqttOff()  {
         mqttPub("192.168.1.1",1883,false,"DVES_5E1089");
         return "off device";
