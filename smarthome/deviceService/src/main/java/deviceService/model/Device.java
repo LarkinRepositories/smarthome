@@ -9,11 +9,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "devices")
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Device extends BaseEntity {
+public abstract class Device extends BaseEntity {
     @Column(name = "name")
     private String aliasName;
     @Column(name = "user_id")
@@ -27,4 +28,6 @@ public class Device extends BaseEntity {
     private Type type;
 //    @Transient
 //    private List<Object> scenarios;
+    public abstract void doCommand();
+
 }
