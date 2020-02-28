@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "devices")
+//@Entity
 @NoArgsConstructor
 @Data
-public class RestDevice extends Device {
+public class RestDevice extends Device implements Commander {
 
     @Override
     public void doCommand() {
-        //implement command logic here, change signature in Device class if needed
+
     }
 }

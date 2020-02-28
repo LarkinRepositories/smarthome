@@ -1,7 +1,9 @@
 package deviceService.rest;
 
 import deviceService.model.Device;
+import deviceService.model.DeviceFactory;
 import deviceService.model.Status;
+import deviceService.model.Type;
 import deviceService.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -38,8 +40,8 @@ public class DeviceController {
     }
 
     @PostMapping("/devices/add/")
-    public void addDevice(@RequestParam(name="alias")String alias,@RequestParam(name="userid") long userid) {
-        Device device = new Device();
+    public void addDevice(@RequestParam(name="alias")String alias,@RequestParam(name="userid") long userid, @RequestParam(name="type")String deviceType) {
+        Device device = DeviceFactory.createDevice(Type.REST_DEVICE);
         device.setAliasName(alias);
         device.setUserId(userid);
         device.setToken("SOME TOKEN");

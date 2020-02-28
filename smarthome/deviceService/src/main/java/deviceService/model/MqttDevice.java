@@ -7,16 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "devices")
+//@Entity
 @Data
-public class MqttDevice extends Device {
+public class MqttDevice extends Device implements Commander {
 
-    public MqttDevice() {
-        this.getType().setName("MQTT_DEVICE");
-    }
+
     @Override
     public void doCommand() {
-        //implement command logic here, change signature in Device class if needed
+
     }
 }
