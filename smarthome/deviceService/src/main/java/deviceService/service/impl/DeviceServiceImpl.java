@@ -4,7 +4,7 @@ import deviceService.model.Device;
 import deviceService.model.Status;
 import deviceService.model.Type;
 import deviceService.repository.DeviceRepository;
-import deviceService.repository.TypeRepository;
+//import deviceService.repository.TypeRepository;
 import deviceService.service.DeviceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +17,19 @@ import java.util.List;
 @Slf4j
 public class DeviceServiceImpl implements DeviceService {
     private DeviceRepository deviceRepository;
-    private TypeRepository typeRepository;
+//    private TypeRepository typeRepository;
 
     @Autowired
-    public DeviceServiceImpl(DeviceRepository deviceRepository, TypeRepository typeRepository) {
+//    public DeviceServiceImpl(DeviceRepository deviceRepository, TypeRepository typeRepository) {
+    public DeviceServiceImpl(DeviceRepository deviceRepository) {
         this.deviceRepository = deviceRepository;
-        this.typeRepository = typeRepository;
+//        this.typeRepository = typeRepository;
     }
 
     @Override
     public Device addDevice(Device device) {
-        Type deviceType = typeRepository.findByName("REST_DEVICE");
-        device.setType(deviceType);
+//        Type deviceType = typeRepository.findByName("REST_DEVICE");
+//        device.setType(deviceType);
         device.setToken("NEW_TOKEN");
         device.setStatus(Status.ACTIVE);
         Device registeredDevice = deviceRepository.save(device);

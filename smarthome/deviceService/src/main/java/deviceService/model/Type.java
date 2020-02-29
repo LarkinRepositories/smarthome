@@ -8,10 +8,8 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "types")
-@Data
-public class Type extends BaseEntity {
-    @Column(name = "name")
-    private String name;
+
+public enum Type {
+    REST_DEVICE,
+    MQTT_DEVICE
 }
