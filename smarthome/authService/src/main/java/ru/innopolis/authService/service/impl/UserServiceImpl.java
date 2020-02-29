@@ -12,6 +12,7 @@ import ru.innopolis.authService.repository.RoleRepository;
 import ru.innopolis.authService.repository.UserRepository;
 import ru.innopolis.authService.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
         userRoles.add(roleUser);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(userRoles);
+        user.setCreated(LocalDateTime.now());
+        user.setUpdated(LocalDateTime.now());
         user.setStatus(Status.ACTIVE);
         User registeredUser = userRepository.save(user);
         log.info("IN register - user {} successfully registered", registeredUser);
@@ -72,9 +75,22 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+
     @Override
-    public void delete(Long id) {
-        userRepository.deleteById(id);
-        log.info("In delete user with id {} successfully deleted", id);
+    public boolean update(User user) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setStatus(Status.DELETED);
+            user.setUpdated(LocalDateTime.now());
+            log.info("In delete user with id {} successfully deleted", id);
+            return true;
+        }
+        log.warn("In delete user with id {} not found", id);
+        return false;
     }
 }

@@ -15,7 +15,7 @@ public class Command extends BaseEntity {
     private String name;
     @Column(name = "command_id")
     private Long commandId;
-    @ManyToMany(mappedBy = "commands", fetch = FetchType.LAZY)
-    List<Device> devices;
+//    @ManyToMany(mappedBy = "commands", fetch = FetchType.LAZY)
+//    List<Device> devices;
 
 }

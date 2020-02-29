@@ -33,7 +33,7 @@ public class DeviceController {
 //       /List<Device> devices = Arrays.asList(new Device(1, "TOKEN1", Collections.emptyList()), new Device(1, "TOKEN2", Collections.emptyList()));
 //       return devices;
 //    }
-    @GetMapping("/devices/")
+    @GetMapping("/devices/get/")
     @LoadBalanced
     public List<Device> getDevices(@RequestParam(name = "userId") Long userId) {
         List<Device> devices = deviceService.findByUserId(userId);
