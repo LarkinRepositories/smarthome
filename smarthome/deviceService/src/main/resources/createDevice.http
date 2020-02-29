@@ -1,0 +1,3 @@
+POST http://localhost:8762/api/device/devices/add/?alias=aliasNamessss&userId=1
+
+###
