@@ -45,7 +45,7 @@ public class DeviceServiceImpl implements DeviceService {
         device.setCreated(LocalDateTime.now());
         device.setUpdated(LocalDateTime.now());
         Device registeredDevice = deviceRepository.save(device);
-        log.info("IN addDevice - device {} successfully registered", registeredDevice);
+        log.info("IN addDevice - device {} successfully added", registeredDevice);
         return registeredDevice;
     }
 
