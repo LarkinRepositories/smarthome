@@ -1,13 +1,14 @@
 package deviceService.rest;
 
 import deviceService.model.Device;
-import deviceService.model.DeviceFactory;
 import deviceService.model.Status;
-import deviceService.model.Type;
 import deviceService.service.DeviceService;
+import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -40,21 +41,26 @@ public class DeviceController {
     }
 
     @PostMapping("/devices/add/")
-    public void addDevice(@RequestParam(name="alias")String alias,@RequestParam(name="userid") long userid, @RequestParam(name="type")String deviceType) {
-        Device device = DeviceFactory.createDevice(Type.REST_DEVICE);
+    public void addDevice(@RequestParam(name="alias")String alias, @RequestParam(name="userId") Long userId) {
+        Device device = new Device();
         device.setAliasName(alias);
-        device.setUserId(userid);
-        device.setToken("SOME TOKEN");
-        device.setStatus(Status.ACTIVE);
+        device.setUserId(userId);
         deviceService.addDevice(device);
     }
 
-//    @PostMapping("/devices/?remove={id}")
-//    public String removeDevice(@RequestParam(name = "id")Long id) {
-//        deviceService.delete(id);
-//        String resultString = "Device with id: "+id+" successfully deleted";
-//        return resultString;
-//    }
+    @PostMapping("/devices/update/")
+    public void updateDevice(@RequestParam(name = "id")Long id,
+                             @RequestParam(name = "alias")String alias,
+                             @RequestParam(name = "types")List<String> types) {
+        deviceService.update(id, alias, types);
+    }
+
+    @PostMapping("/devices/delete/")
+    public String removeDevice(@RequestParam(name = "id")Long id) {
+        deviceService.delete(id);
+        String resultString = "Device with id: "+id+" successfully deleted";
+        return resultString;
+    }
 
 
 
