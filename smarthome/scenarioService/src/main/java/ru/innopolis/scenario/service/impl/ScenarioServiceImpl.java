@@ -36,6 +36,7 @@ public class ScenarioServiceImpl implements ScenarioService {
         scenario.setTypes(scenarioTypes);
         scenario.setCreated(LocalDateTime.now());
         scenario.setUpdated(LocalDateTime.now());
+        scenario.setRunTime(LocalDateTime.now());
         scenario.setStatus(Status.ACTIVE);
         Scenario registeredScenario = scenarioRepository.save(scenario);
         return registeredScenario;

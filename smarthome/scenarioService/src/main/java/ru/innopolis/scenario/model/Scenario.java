@@ -2,12 +2,14 @@ package ru.innopolis.scenario.model;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "scenarios")
 @Data
@@ -27,6 +29,6 @@ public class Scenario extends BaseEntity{
     @Column(name = "command_id")
     private long commandId;
     @Column(name = "run_time")
-    private LocalDateTime time;
+    private LocalDateTime runTime;
 
 }

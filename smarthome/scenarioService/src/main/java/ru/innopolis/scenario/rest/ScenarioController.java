@@ -28,7 +28,9 @@ public class ScenarioController {
     }
 
     @PostMapping("/scenarios/add/")
-    public void addScenario(@RequestParam(name = "alias")String alias, @RequestParam(name = "userId") Long userId, @RequestParam(name = "deviceId")Long deviceId) {
+    public void addScenario(@RequestParam(name = "alias")String alias,
+                            @RequestParam(name = "userId") Long userId,
+                            @RequestParam(name = "deviceId")Long deviceId) {
         Scenario scenario = new Scenario();
         scenario.setAliasName(alias);
         scenario.setUserId(userId);
