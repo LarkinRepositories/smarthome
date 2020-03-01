@@ -1,14 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
+    <base href="http://localhost:8762/web/">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>SmartHome</title>
+    <%@ page isELIgnored="false" %>
 </head>
 
 <body>
@@ -38,38 +41,39 @@
             <div class="navitem" onclick="location.href='/web/exit'">LOGOUT (${name})</div>
         </nav>
         <div style="width: 100%; text-align: right">
-            <a href="/web/devices/add">Добавить устройство</a>
+            <a href="/web/devices">Обратно к списку устройств</a>
         </div>
-        <form action="devices" method="post">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Название устройства</th>
-                    <th>Марка</th>
-                    <th>Место установки</th>
-                    <th>Состояние</th>
-                    <th>Действия(просмотр, ред., удаление)</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="device" items="${devices}">
-                    <tr>
-                        <td scope="row">${device.id}</td>
-                        <td>${device.name}</td>
-                        <td>${device.brand}</td>
-                        <td>${device.place}</td>
-                        <td>${device.state}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/showdevice?id=${device.id}">Link</a>                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="${pageContext.request.contextPath}/editdevice?id=${device.id}">Edit</a>                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="${pageContext.request.contextPath}/deletedevice?id=${device.id}">Delete</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+        <c:if test="${success!=''}">
+            <div class="alert alert-success" role="alert">${success}</div>
+        </c:if>
+        <form action="devices/add" method="post" class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Добавить устройство</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="alias">Alias</label>
+                    <div class="col-md-4">
+                        <input id="alias" name="alias" type="text" placeholder="Название устройства на латиннице"
+                               class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="button1id"></label>
+                    <div class="col-md-8">
+                        <button type="submit" id="button1id" name="button1id" class="btn btn-success">Добавить</button>
+                        <button id="button2id" name="button2id" class="btn btn-danger">Вернуться к списку</button>
+                    </div>
+                </div>
+
+            </fieldset>
         </form>
+
     </div>
 </div>
 </body>

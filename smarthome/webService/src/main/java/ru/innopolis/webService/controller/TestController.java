@@ -1,5 +1,7 @@
 package ru.innopolis.webService.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -7,25 +9,26 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import ru.innopolis.webService.pojo.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.web.client.RestTemplate;
-import ru.innopolis.webService.pojo.User;
-
-
 
 @RestController
 @RequestMapping("/")
 public class TestController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+
     @Autowired
     private RestTemplate restTemplate;
 
     @GetMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index() {
         return new ModelAndView("login");
     }
 
@@ -72,6 +75,9 @@ public class TestController {
     public ModelAndView handleRequestDevices(HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
         ModelAndView mav = new ModelAndView("devices");
+        //  String stringPosts = restTemplate.getForObject("http://device-service/devices/", String.class);
+        //  logger.info(stringPosts);
+
         return mav;
     }
 
