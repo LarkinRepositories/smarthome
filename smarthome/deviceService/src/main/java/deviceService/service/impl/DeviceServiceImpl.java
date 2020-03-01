@@ -76,7 +76,7 @@ public class DeviceServiceImpl implements DeviceService {
             log.info("In update: device with id {} successfully updated", id);
             return true;
         }
-        log.warn("In update: there's no user with id {}", id);
+        log.warn("In update: there's no device with id {}", id);
         return false;
     }
 

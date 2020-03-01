@@ -1,5 +1,6 @@
 package ru.innopolis.scenario.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import ru.innopolis.scenario.repository.ScenarioRepository;
 @RestController
 @RequestMapping("/")
 public class ScenarioController {
+
     private ScenarioRepository scenarioRepository;
 
     @GetMapping("/hello")
