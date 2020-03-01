@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * %2BXXXXXXXXXXX - номер телефона в международном формате (%2B-знак "+")
  */
 @SpringBootApplication
-@EnableSwaagger2
+@EnableSwagger2
 @EnableEurekaClient
 public class SmsApplication {
     public static void main(String[] args) {
