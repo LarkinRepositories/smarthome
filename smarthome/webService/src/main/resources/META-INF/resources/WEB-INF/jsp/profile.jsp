@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
@@ -37,8 +38,8 @@
             <div class="navitem active" onclick="location.href='/web/profile'">Профиль</div>
             <div class="navitem" onclick="location.href='/web/exit'">LOGOUT (${name})</div>
         </nav>
-
-        <form method="post" action="${pageContext.request.contextPath}/editprofile" autocomplete="off">
+        <%--@elvariable id="user" type="ru.innopolis.webService.pojo.User"--%>
+        <form:form method="POST" action="/web/saveProfile" modelAttribute="user">
             <input type="hidden" name="id" value="<c:out value='${editingUser.id}' />" />
             <div class="form-group">
                 <label for="name">Имя</label>
@@ -57,7 +58,7 @@
                 <input name="telegram" type="text" class="form-control" id="telegram" value="<c:out value='${editingUser.telegram}' />" />
             </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
-        </form>
+        </form:form>
     </div>
 </div>
 </body>
