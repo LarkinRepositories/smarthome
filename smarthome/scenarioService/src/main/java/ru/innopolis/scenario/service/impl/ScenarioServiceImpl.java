@@ -63,10 +63,11 @@ public class ScenarioServiceImpl implements ScenarioService {
     }
 
     @Override
-    public boolean update(Long id, String alias, List<String> typeNames) {
+    public boolean update(Long id, String alias, Long deviceId, List<String> typeNames) {
        Scenario scenario = scenarioRepository.findById(id).orElse(null);
        if (scenario != null) {
            scenario.setAliasName(alias);
+           scenario.setDeviceId(deviceId);
            List<Type> scenarioTypes = new ArrayList<>();
            typeNames.forEach(e -> scenarioTypes.add(typeRepository.findByName(e)));
            scenario.setTypes(scenarioTypes);
