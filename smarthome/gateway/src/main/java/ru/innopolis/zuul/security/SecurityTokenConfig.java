@@ -39,6 +39,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
          web.ignoring()
                  .antMatchers("/web/**", "/web/resources/**", "/web/static/**")
                  .antMatchers("/api/device/**")
+                 .antMatchers("/api/scenario/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 

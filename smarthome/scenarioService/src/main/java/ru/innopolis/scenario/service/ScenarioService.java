@@ -9,6 +9,6 @@ public interface ScenarioService {
     List<Scenario> getAll();
     List<Scenario> findByUserId(Long userId);
     List<Scenario> findByDeviceId(Long deviceId);
-    boolean update(Long id, String alias, List<String> typeNames);
+    boolean update(Long id, String alias, Long deviceId, List<String> typeNames);
     boolean delete(Long id);
 }
