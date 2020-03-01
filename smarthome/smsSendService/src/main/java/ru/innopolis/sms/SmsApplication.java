@@ -3,6 +3,7 @@ package ru.innopolis.sms;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Точка входа в приложение
@@ -13,6 +14,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * %2BXXXXXXXXXXX - номер телефона в международном формате (%2B-знак "+")
  */
 @SpringBootApplication
+@EnableSwaagger2
 @EnableEurekaClient
 public class SmsApplication {
     public static void main(String[] args) {
