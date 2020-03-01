@@ -10,6 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author Alina
  * пример вызова
  * http://localhost:8080/sendSMS?to=%2BXXXXXXXXXXX&message=Hello
+ * http://localhost:8762/sms/sendSMS?to=%2BXXXXXXXXXXX&message=Hello
  * %2BXXXXXXXXXXX - номер телефона в международном формате (%2B-знак "+")
  */
 @SpringBootApplication

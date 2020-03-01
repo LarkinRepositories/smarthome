@@ -30,7 +30,7 @@ public class SMSServiceTwilio implements  SMSService {
         try {
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             Message message = Message.creator(
-                    new PhoneNumber(sms.getTo()),//Номер телефона, на который вы отправляете сообщение
+                    new PhoneNumber("+"+sms.getTo()),//Номер телефона, на который отправляется сообщение
                     new PhoneNumber(FROM_NUMBER),
                     sms.getMessage())
                     .create();

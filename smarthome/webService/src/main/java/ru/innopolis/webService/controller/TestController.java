@@ -1,16 +1,21 @@
 package ru.innopolis.webService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.client.RestTemplate;
+import javax.validation.Valid;
 
-import java.util.Collection;
-import java.util.Map;
+import org.springframework.web.client.RestTemplate;
+import ru.innopolis.webService.pojo.User;
+
 
 
 @RestController
@@ -23,18 +28,26 @@ public class TestController {
     public ModelAndView index(){
         return new ModelAndView("login");
     }
-//    @GetMapping("/login")
-//    public String afterAuth(@RequestParam("name") String name){
-//        return "index";
-//    }
+
+    @RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
+    public ModelAndView submit(@Valid @ModelAttribute("user")User user,
+                         BindingResult result, ModelMap model) {
+        model.addAttribute("name", user.getName());
+        model.addAttribute("address", user.getAddress());
+        model.addAttribute("phone", user.getPhone());
+        model.addAttribute("telegram", user.getTelegram());
+        StringBuilder url = new StringBuilder("http://sms-service/sendSMS?to=").append(user.getPhone()).append("&message=")
+                .append("Profile was changed");
+        ResponseEntity response = restTemplate.exchange(url.toString(), HttpMethod.GET, null, Object.class);
+        return new ModelAndView("main");
+    }
 
     @PostMapping("/auth-form")
-    public ModelAndView  sayHello(@RequestParam("name") String name, Model model){
+//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView  sayHello(@RequestParam("name") String name, Model model,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response){
         model.addAttribute("name", name);
-        //String uri = restTemplate.getForObject("http://auth-service/api/auth/", String.class);
-                //    org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 :
-                //    [{"timestamp":"2020-02-23T16:46:39.212+0000","status":401,"error":"Unauthorized",
-                //    "m*essage":"No message available","path":"/api/auth/"}]
         return new ModelAndView("main");
     }
 
@@ -65,7 +78,7 @@ public class TestController {
     @GetMapping(value = "/profile")
     public ModelAndView handleRequestProfile(HttpServletRequest request,
                                              HttpServletResponse response) throws Exception {
-        ModelAndView mav = new ModelAndView("profile");
+        ModelAndView mav = new ModelAndView("profile", "user", new User());
         return mav;
     }
 
@@ -75,5 +88,4 @@ public class TestController {
         ModelAndView mav = new ModelAndView("exit");
         return mav;
     }
-
 }
