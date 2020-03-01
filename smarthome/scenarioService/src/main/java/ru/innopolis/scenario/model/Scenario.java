@@ -20,7 +20,7 @@ public class Scenario extends BaseEntity{
     private long deviceId;
     @Column(name = "command_id")
     private long commandId;
-    @Column(name = "time")
+    @Column(name = "run_time")
     private Date time;
 
 }
