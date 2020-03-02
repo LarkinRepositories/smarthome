@@ -120,7 +120,7 @@
                                  onUpdate="CASCADE"
                                  onDelete="RESTRICT"
                                  referencedTableName="commands"
-                                 referencedColumnNames="command_id" />
+                                 referencedColumnNames="id" />
     </changeSet>
     <changeSet id="1.0.9" author="larkinds">
         <insert tableName="types">
