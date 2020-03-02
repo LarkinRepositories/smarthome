@@ -137,7 +137,7 @@
         </insert>
         <insert tableName="commands">
             <column name="name" value="OFF" />
-            <column name="command_id" value="2" />
+            <column name="command_id" value="0" />
         </insert>
     </changeSet>
 </databaseChangeLog>
