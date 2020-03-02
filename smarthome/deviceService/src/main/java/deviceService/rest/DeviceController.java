@@ -1,5 +1,6 @@
 package deviceService.rest;
 
+import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,23 @@ public class DeviceController {
     @PostMapping("/devices/on/")
     public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {
         Device device = deviceService.getDevice(deviceId);
+        Long commandId = device.getCommands().get(0).getCommandId();
         String url = "http://mqtt-service/test/on/" +
                 "?ip=" + device.getIp() +
                 "&port=" + device.getPort() +
-                "&commandId=1"+
+                "&commandId="+ commandId +
+                "&device=" + device.getAliasName();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    @PostMapping("/devices/off/")
+    public String turnDeviceOff(@RequestParam(name ="id")Long deviceId) {
+        Device device = deviceService.getDevice(deviceId);
+        Long commandId = device.getCommands().get(1).getCommandId();
+        String url = "http://mqtt-service/test/off/" +
+                "?ip=" + device.getIp() +
+                "&port=" + device.getPort() +
+                "&commandId="+ commandId +
                 "&device=" + device.getAliasName();
         return restTemplate.getForObject(url, String.class);
     }
