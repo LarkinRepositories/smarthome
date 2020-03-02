@@ -9,6 +9,7 @@ public interface DeviceService {
     List<Device> getAll();
     List<Device> findByUserId(Long userId);
     boolean update(Long id, String alias, List<String> typeNames);
+//    boolean update(Device device);
     boolean delete(Long id);
 
 }

@@ -21,6 +21,10 @@ import java.util.List;
 public class Device extends BaseEntity {
     @Column(name = "name")
     private String aliasName;
+    @Column(name = "ip_adress")
+    private String ip;
+    @Column(name = "port")
+    private Integer port;
     @Column(name = "user_id")
     private long userId;
     @Column(name = "token")
