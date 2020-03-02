@@ -20,6 +20,24 @@ public class MqttController {
         mqttPub(ip,port,commandId,device);
     }
 
+    @RequestMapping("/test/on/")
+    public String mqttOn(@RequestParam(name="ip")String ip,
+                         @RequestParam(name="port")Integer port,
+                         @RequestParam(name = "commandId")Long commandId,
+                         @RequestParam(name = "device")String deviceAlias)  {
+//        mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
+        mqttPub(ip,port,commandId, deviceAlias);
+        return "on device";
+    }
+
+
+    @RequestMapping("/MqttOff")
+    public String mqttOff()  {
+        mqttPub("192.168.1.1",1883,1L,"DVES_5E1089");
+        return "off device";
+    }
+
+//    public void mqttPub(String host, int port, Boolean isOn, String device) {
 //    @RequestMapping("/MqttOn")
 //    public String mqttOn()  {
 //        mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
@@ -42,16 +60,16 @@ public class MqttController {
         }
     }
 
-    public void mqttSub(String host, int port, Boolean isOn, String device) {
-        MqttCommon mqttCommon = new MqttCommon();
-            String iotData = "iotData";
-        try {
-            mqttCommon.subscriber(host,port,iotData);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-        //   mqttCommon.publisher(host,port,iotData,message);
-
-    }
+//    public void mqttSub(String host, int port, Boolean isOn, String device) {
+//        MqttCommon mqttCommon = new MqttCommon();
+//            String iotData = "iotData";
+//        try {
+//            mqttCommon.subscriber(host,port,iotData);
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//        }
+//        //   mqttCommon.publisher(host,port,iotData,message);
+//
+//    }
 
 }
