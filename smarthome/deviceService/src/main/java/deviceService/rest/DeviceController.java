@@ -1,5 +1,6 @@
 package deviceService.rest;
 
+import deviceService.dto.DeviceDto;
 import deviceService.model.Device;
 import deviceService.model.Status;
 import deviceService.service.DeviceService;
@@ -41,12 +42,20 @@ public class DeviceController {
     }
 
     @PostMapping("/devices/add/")
-    public void addDevice(@RequestParam(name="alias")String alias, @RequestParam(name="userId") Long userId) {
+    public void addDevice(@RequestParam(name="alias")String alias,@RequestParam(name="ip")String ip, @RequestParam(name="port")Integer port, @RequestParam(name="userId") Long userId) {
         Device device = new Device();
         device.setAliasName(alias);
+        device.setIp(ip);
+        device.setPort(port);
         device.setUserId(userId);
         deviceService.addDevice(device);
     }
+
+//    @PostMapping("/devices/add/")
+//    public void addDevice(@RequestBody DeviceDto deviceDto) {
+//
+//    }
+
 
     @PostMapping("/devices/update/")
     public void updateDevice(@RequestParam(name = "id")Long id,
