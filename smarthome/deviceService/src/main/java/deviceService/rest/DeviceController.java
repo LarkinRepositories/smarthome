@@ -23,6 +23,7 @@ public class DeviceController {
         String url = "http://mqtt-service/test/on/" +
                 "?ip=" + device.getIp() +
                 "&port=" + device.getPort() +
+                "&commandId=1"+
                 "&device=" + device.getAliasName();
         return restTemplate.getForObject(url, String.class);
     }
