@@ -30,6 +30,16 @@ public class MqttController {
         return "on device";
     }
 
+    @RequestMapping("/test/off/")
+    public String mqttOff(@RequestParam(name="ip")String ip,
+                         @RequestParam(name="port")Integer port,
+                         @RequestParam(name = "commandId")Long commandId,
+                         @RequestParam(name = "device")String deviceAlias)  {
+//        mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
+        mqttPub(ip,port,commandId, deviceAlias);
+        return "off device";
+    }
+
 
     @RequestMapping("/MqttOff")
     public String mqttOff()  {
