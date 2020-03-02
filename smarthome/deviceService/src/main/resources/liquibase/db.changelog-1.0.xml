@@ -10,6 +10,12 @@
             <column name = "name" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true" />
             </column>
+            <column name="ip_adress" type="VARCHAR(15)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="port" type="SMALLINT">
+                <constraints nullable="false" unique="false" />
+            </column>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false" unique="false" />
             </column>
