@@ -1,0 +1,8 @@
+#on
+GET 127.0.0.1:11100/restOn
+###
+# without Eurica
+POST 127.0.0.1:11100/?ip=192.168.1.93&commandId=1
+###
+# with Eurica
+POST 127.0.0.1:8762/api/rest-service-out/?ip=192.168.1.93&commandId=1

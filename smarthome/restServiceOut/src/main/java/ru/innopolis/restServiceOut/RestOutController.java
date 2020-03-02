@@ -7,7 +7,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,26 +25,33 @@ public class RestOutController {
 
     private static final Logger logger = LoggerFactory.getLogger(RestOutController.class);
 
-    @RequestMapping("/restOn")
-    public String restOn() throws Exception {
-        return sendGet("192.168.1.93", true);
+//    @RequestMapping("/restOn")
+//    public String restOn() throws Exception {
+//        return sendGet("192.168.1.93", true);
+//    }
+
+    @PostMapping("/")
+    public void restDo(@RequestParam(name="ip")String ip, @RequestParam(name="commandId") Long commandId) throws Exception {
+        sendGet(ip,commandId);
     }
 
+//    @RequestMapping("/restOff")
+//    public String restOff() throws Exception {
+//        return sendGet("192.168.1.93", false);
+//    }
 
-    @RequestMapping("/restOff")
-    public String restOff() throws Exception {
-        return sendGet("192.168.1.93", false);
-    }
-
-    private String sendGet(String ip, boolean isOn) throws Exception {
+    private String sendGet(String ip, Long idCommand) throws Exception {
 
         String result;
 
         String switcher;
-        if (isOn) {
+        if (idCommand ==1) {
             switcher = "On";
-        } else {
+        }
+        if (idCommand==0) {
             switcher = "Off";
+        } else {
+            switcher = null;
         }
 
         String url = "http://" + ip + "/cm?cmnd=Power%20" + switcher + "";

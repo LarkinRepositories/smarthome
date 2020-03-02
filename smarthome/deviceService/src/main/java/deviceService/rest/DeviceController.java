@@ -1,6 +1,6 @@
 package deviceService.rest;
 
-import deviceService.dto.DeviceDto;
+
 import deviceService.model.Device;
 import deviceService.model.Status;
 import deviceService.service.DeviceService;

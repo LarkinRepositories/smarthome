@@ -1,0 +1,8 @@
+#on local
+GET 127.0.0.1:10100/MqttOn
+###
+# without Eurica
+POST 127.0.0.1:10100/?ip=192.168.1.1&port=1883&commandId=1&device=DVES_5E1089
+###
+# with Eurica
+POST 127.0.0.1:8762/api/mqtt-service/?ip=192.168.1.1&port=1883&commandId=1&device=DVES_5E1089

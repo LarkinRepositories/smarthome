@@ -1,0 +1,3 @@
+GET http://localhost:8762/api/scenario/hello
+
+###
