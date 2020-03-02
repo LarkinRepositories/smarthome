@@ -50,6 +50,12 @@ public class ScenarioServiceImpl implements ScenarioService {
     }
 
     @Override
+    public Scenario getScenario(Long id) {
+        Scenario scenario = scenarioRepository.findById(id).orElse(null);
+        return scenario;
+    }
+
+    @Override
     public List<Scenario> findByUserId(Long userId) {
         List<Scenario> scenarios = scenarioRepository.findAllByUserId(userId);
         log.info("In findByUserId - {} scenarios found with userId: {}", scenarios.size(), userId);

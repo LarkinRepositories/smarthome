@@ -1,3 +1,17 @@
-POST http://localhost:8762/api/device/devices/add/?alias=aliasNamessss&userId=1
+#create mqqt device
+POST http://localhost:8762/api/device/devices/add/?alias=sonoff&ip=192.168.1.1&port=1883&userId=1
+###
+#create mqqt device
+POST http://localhost:8762/api/device/devices/add/?alias=sonoff&ip=192.168.1.1&port=1883&userId=1
+###
+#on
+POST http://localhost:8762/api/device/devices/on/?id=1
+###
+#off
+POST http://localhost:8762/api/device/devices/off/?id=1
+
+###
+#get devices by userId
+GET http://localhost:8762/api/device/devices/get/?userId=1
 
 ###

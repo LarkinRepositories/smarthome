@@ -1,58 +1,43 @@
 package ru.innopolis.scenario.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.innopolis.scenario.model.Scenario;
 import ru.innopolis.scenario.service.ScenarioService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/")
 public class ScenarioController {
+
     @Autowired
     private ScenarioService scenarioService;
 
-    @GetMapping("/hello")
-    @LoadBalanced
-    public String getHello() {
-        return "Hello from scenario service, you are authorized";
+    @PostMapping("/scenario/run/")
+    public String runScenario(@RequestParam(name="id")Long scenarioID) {
+        Scenario scenario = scenarioService.getScenario(scenarioID);
+        Long userId = scenario.getUserId();
+        Long deviceID = scenario.getDeviceId();
+        Long commandID = scenario.getCommandId();
+       // String url = "http://" +
+        //todo как-то нужно пробрасывать или даже выполнять у deviceID комманду commandID по scheduler
+
+        return null;
     }
 
-    @GetMapping("/scenarios/get/")
-    @LoadBalanced
-    public List<Scenario> getScenarios(@RequestParam(name = "userId") Long userId) {
-        List<Scenario> scenarios = scenarioService.findByUserId(userId);
-        return scenarios;
-    }
+//    @PostMapping("/scenario/run/")
+//    public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {
+//        Device device = deviceService.getDevice(deviceId);
+//        Long commandId = device.getCommands().get(0).getCommandId();
+//        String url = "http://mqtt-service/test/on/" +
+//                "?ip=" + device.getIp() +
+//                "&port=" + device.getPort() +
+//                "&commandId="+ commandId +
+//                "&device=" + device.getAliasName();
+//        return restTemplate.getForObject(url, String.class);
+//    }
 
-    @PostMapping("/scenarios/add/")
-    public void addScenario(@RequestParam(name = "alias")String alias,
-                            @RequestParam(name = "userId") Long userId,
-                            @RequestParam(name = "deviceId")Long deviceId) {
-        Scenario scenario = new Scenario();
-        scenario.setAliasName(alias);
-        scenario.setUserId(userId);
-        scenario.setDeviceId(deviceId);
-        scenarioService.addScenario(scenario);
-    }
-
-    @PostMapping("/scenarios/update/")
-    public String updateScenario(@RequestParam(name = "id")Long id,
-                               @RequestParam(name = "alias")String alias,
-                               @RequestParam(name = "deviceId")Long deviceId,
-                               @RequestParam(name = "types")List<String> types) {
-        scenarioService.update(id, alias, deviceId, types);
-        String resultString = "Scenario with id: "+id+" successfully updated";
-        return resultString;
-    }
-
-
-    @PostMapping("/scenarios/delete")
-    public String removeScenario(@RequestParam(name = "id")Long id) {
-        scenarioService.delete(id);
-        String resultString = "Scenario with id: "+id+" successfully deleted";
-        return resultString;
-    }
 }

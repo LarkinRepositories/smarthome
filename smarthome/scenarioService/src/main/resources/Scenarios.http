@@ -1,0 +1,4 @@
+GET http://127.0.0.1:14100/scenarios/get/?userId=1
+
+###
+GET http://localhost:8762/api/device/devices/get/?userId=1
