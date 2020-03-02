@@ -50,6 +50,12 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    public Device getDevice(Long id) {
+        Device device = deviceRepository.findById(id).orElse(null);
+        return device;
+    }
+
+    @Override
     public List<Device> getAll() {
         List<Device> devices = deviceRepository.findAll();
         log.info("IN getAll - {} devices found", devices.size());
@@ -92,5 +98,14 @@ public class DeviceServiceImpl implements DeviceService {
         }
         log.warn("In delete: device with id {} not found", id);
         return false;
+    }
+
+    @Override
+    public boolean turnDeviceOn(Long id) {
+        Device device =  deviceRepository.findById(id).orElse(null);
+        if (device !=null) {
+
+        }
+        return  false;
     }
 }

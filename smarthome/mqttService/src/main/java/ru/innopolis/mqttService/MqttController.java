@@ -5,6 +5,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,6 +18,16 @@ public class MqttController {
         mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
         return "on device";
     }
+
+    @RequestMapping("/test/on/")
+    public String mqttOn(@RequestParam(name="ip")String ip,
+                         @RequestParam(name="port")Integer port,
+                         @RequestParam(name = "device")String deviceAlias)  {
+//        mqttPub("192.168.1.1",1883,true,"DVES_5E1089");
+        mqttPub(ip,port,true, deviceAlias);
+        return "on device";
+    }
+
 
     @RequestMapping("/MqttOff")
     public String mqttOff()  {
