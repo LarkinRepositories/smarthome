@@ -33,46 +33,51 @@ public class CrudController {
 //    public List<Device> getAllDevices() {
 //       /List<Device> devices = Arrays.asList(new Device(1, "TOKEN1", Collections.emptyList()), new Device(1, "TOKEN2", Collections.emptyList()));
 //       return devices;
+
+    @GetMapping("/devices/add/")
+    public DeviceDto addDevice(@RequestBody DeviceDto deviceDto) {
+        return deviceService.addDevice(deviceDto);
+    }
+
+//    @GetMapping("/devices/get/")
+//    @LoadBalanced
+//    public List<Device> getDevices(@RequestParam(name = "userId") Long userId) {
+//        List<Device> devices = deviceService.findByUserId(userId);
+//        return devices;
 //    }
-    @GetMapping("/devices/get/")
-    @LoadBalanced
-    public List<Device> getDevices(@RequestParam(name = "userId") Long userId) {
-        List<Device> devices = deviceService.findByUserId(userId);
-        return devices;
-    }
-
-    @PostMapping("/devices/add/")
-    public void addDevice(@RequestParam(name="alias")String alias,
-                          @RequestParam(name="ip")String ip,
-                          @RequestParam(name="port")Integer port,
-                          @RequestParam(name="userId") Long userId) {
-        Device device = new Device();
-        device.setAliasName(alias);
-        device.setIp(ip);
-        device.setPort(port);
-        device.setUserId(userId);
-        deviceService.addDevice(device);
-    }
-
-//    @PostMapping("/devices/add/")
-//    public void addDevice(@RequestBody DeviceDto deviceDto) {
 //
+//    @PostMapping("/devices/add/")
+//    public void addDevice(@RequestParam(name="alias")String alias,
+//                          @RequestParam(name="ip")String ip,
+//                          @RequestParam(name="port")Integer port,
+//                          @RequestParam(name="userId") Long userId) {
+//        Device device = new Device();
+//        device.setAliasName(alias);
+//        device.setIp(ip);
+//        device.setPort(port);
+//        device.setUserId(userId);
+//        deviceService.addDevice(device);
 //    }
-
-
-    @PostMapping("/devices/update/")
-    public void updateDevice(@RequestParam(name = "id")Long id,
-                             @RequestParam(name = "alias")String alias,
-                             @RequestParam(name = "types")List<String> types) {
-        deviceService.update(id, alias, types);
-    }
-
-    @PostMapping("/devices/delete/")
-    public String removeDevice(@RequestParam(name = "id")Long id) {
-        deviceService.delete(id);
-        String resultString = "Device with id: "+id+" successfully deleted";
-        return resultString;
-    }
+//
+////    @PostMapping("/devices/add/")
+////    public void addDevice(@RequestBody DeviceDto deviceDto) {
+////
+////    }
+//
+//
+//    @PostMapping("/devices/update/")
+//    public void updateDevice(@RequestParam(name = "id")Long id,
+//                             @RequestParam(name = "alias")String alias,
+//                             @RequestParam(name = "types")List<String> types) {
+//        deviceService.update(id, alias, types);
+//    }
+//
+//    @PostMapping("/devices/delete/")
+//    public String removeDevice(@RequestParam(name = "id")Long id) {
+//        deviceService.delete(id);
+//        String resultString = "Device with id: "+id+" successfully deleted";
+//        return resultString;
+//    }
 
 
 

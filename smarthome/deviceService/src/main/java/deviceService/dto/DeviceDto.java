@@ -19,7 +19,7 @@ public class DeviceDto extends BaseEntityDto {
      private String aliasName;
      private String ip;
      private Integer port;
-     private long userId;
+     private Long userId;
      private String token;
      private List<TypeDto> types;
      private List<CommandDto> commands;

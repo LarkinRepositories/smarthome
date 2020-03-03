@@ -2,7 +2,6 @@ package deviceService.mapper;
 
 import deviceService.dto.CommandDto;
 import deviceService.model.Command;
-import deviceService.model.Type;
 import deviceService.repository.CommandRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
