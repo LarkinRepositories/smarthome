@@ -46,7 +46,7 @@ public class DeviceMapper extends AbstractMapper<Device, DeviceDto> {
 
     @Override
     protected void mapSpecificFields(Device source, DeviceDto destination) {
-        destination.setTypes(getTypesIds(source));
+        destination.setTypes(getTypeNames(source));
         destination.setCommands(getCommandIds(source));
     }
 
@@ -56,22 +56,26 @@ public class DeviceMapper extends AbstractMapper<Device, DeviceDto> {
 //        destination.setCommands(getCommands(source));
     }
 
-    private String[] getTypesIds(Device source) {
+    private String[] getTypeNames(Device source) {
 //        List<String> typeIdList = new ArrayList<>();
 //        source.getTypes().forEach(type -> String.valueOf(typeRepository.findById(type.getId()).orElse(null).getId()));
 //        return (String[]) typeIdList.toArray();
         String[] strings = new String[source.getTypes().size()];
         for (int i = 0; i < strings.length; i++) {
-            strings[i] = String.valueOf(typeRepository.findById(source.getTypes().get(i).getId()));
+            strings[i] = String.valueOf(source.getTypes().get(i).getId());
+
         }
         return strings;
     }
 
     private List<Type> getTypes(DeviceDto source) {
-        List<String> longTypeIds = Arrays.asList(source.getTypes());
+        List<String> typeNames = Arrays.asList(source.getTypes());
         List<Long> longs = new ArrayList<>();
-        longTypeIds.forEach(e-> longs.add(Long.valueOf(e)));
+        typeNames.forEach(e-> longs.add(Long.valueOf(e)));
         List<Type> types = typeRepository.findAllById(longs);
+//        List<Long> ids = new ArrayList<>();
+//
+////        Arrays.asList(source.getTypes()).forEach(e-> types.add(typeRepository.findByName(e)));
         return types;
     }
 

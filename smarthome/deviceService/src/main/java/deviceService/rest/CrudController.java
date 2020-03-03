@@ -4,6 +4,7 @@ import deviceService.dto.DeviceDto;
 import deviceService.model.Device;
 import deviceService.model.Status;
 import deviceService.service.DeviceService;
+import liquibase.pro.packaged.D;
 import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -44,6 +45,31 @@ public class CrudController {
     public List<DeviceDto> getDevices(@PathVariable String id) {
         Long userId = Long.valueOf(id);
         return deviceService.findAllByUserId(userId);
+    }
+
+    @PostMapping("/devices/update/{id}")
+    public boolean updateDevice(@PathVariable String id, DeviceDto deviceDto) {
+//    @PostMapping("/devices/update/")
+//    public boolean updateDevice(@RequestParam(name = "id")Long id, DeviceDto deviceDto) {
+       Long deviceId = Long.valueOf(id);
+       deviceDto.setId(deviceId);
+       return  deviceService.update(deviceDto);
+    }
+
+    @GetMapping("/devices/device/get/{id}")
+    public DeviceDto getDevice(@PathVariable String id) {
+        Long deviceId = Long.valueOf(id);
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        return deviceService.getDevice(deviceDto);
+    }
+
+    @PostMapping("/devices/device/delete/{id}")
+    public boolean deleteDevice(@PathVariable String id) {
+        Long deviceId = Long.valueOf(id);
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        return deviceService.delete(deviceDto);
     }
 
 //    @GetMapping("/devices/get/")

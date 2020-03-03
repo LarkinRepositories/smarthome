@@ -15,6 +15,9 @@ public interface DeviceService {
 //    boolean delete(Long id);
 //    boolean turnDeviceOn(Long id);
     DeviceDto addDevice(DeviceDto deviceDto);
+    boolean update(DeviceDto deviceDto);
+    boolean delete(DeviceDto deviceDto);
+    DeviceDto getDevice(DeviceDto deviceDto);
     List<DeviceDto> findAllByUserId(Long userId);
 
 

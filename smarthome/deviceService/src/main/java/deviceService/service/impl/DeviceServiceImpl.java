@@ -42,6 +42,32 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceDtos;
     }
 
+    @Override
+    public boolean update(DeviceDto deviceDto) {
+        if (deviceRepository.findById(deviceDto.getId()).isPresent()) {
+            deviceDto.setUpdated(LocalDateTime.now());
+            deviceRepository.save(mapper.toEntity(deviceDto));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean delete(DeviceDto deviceDto) {
+        if (deviceRepository.findById(deviceDto.getId()).isPresent()) {
+            deviceDto.setStatus(Status.DELETED);
+            deviceDto.setUpdated(LocalDateTime.now());
+            deviceRepository.save(mapper.toEntity(deviceDto));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public DeviceDto getDevice(DeviceDto deviceDto) {
+        return  mapper.toDto(deviceRepository.findById(deviceDto.getId()).orElse(null));
+    }
+
     //    private TypeRepository typeRepository;
 //    private CommandRepository commandRepository;
 //    private DeviceMapper mapper;
