@@ -32,57 +32,42 @@ public class ScenarioController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private  int  MINUTES_TO_ADD = 1;
-    boolean mayIAddMinutes = false;
+    private int MINUTES_TO_ADD = 1;
+    boolean runOnce = false;
+
 
     @Scheduled(cron = "0/2 * * * * ?")
     public void runScenario() {
 
         Date nowDate = new Date();
-
         List<Scenario> scenarioList = scenarioService.getAll();
 
         List<Scenario> scenarioListActive = scenarioList.stream()
-                .filter(s->s.getStatus().equals(Status.ACTIVE)).collect(Collectors.toList());
+                .filter(s -> s.getStatus().equals(Status.ACTIVE)).collect(Collectors.toList());
 
         for (int i = 0; i < scenarioListActive.size(); i++) {
 
             Scenario scenario = scenarioListActive.get(i);
-            Date modifyDate =  convertToDateViaInstant(scenario.getRunTime());
+            Date modifyDate = convertToDateViaInstant(scenario.getRunTime());
 
-            if (mayIAddMinutes = false) {
-                runTimeTask(modifyDate,nowDate,scenario.getId(),scenario.getCommandId());
-            } else {
-                log.info("wait time plus");
-            }
-
-
+            runTimeTask(modifyDate, nowDate, scenario);
         }
-
-
 
 
     }
 
-    public void runTimeTask(Date desiredDate,Date now,Long scenarioId,Long commandID){
-        long delay = desiredDate.getTime() - now.getTime();
-        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-        ses.schedule(new Runnable(){
-            @Override
-            public void run() {
-                if (commandID==1){
-                    turnDeviceOn(scenarioId);
-                    mayIAddMinutes = true;
-                }
-                if (commandID == 0) {
-                    turnDeviceOff(scenarioId);
-                    mayIAddMinutes = true;
-                } else {
 
-                }
-            }
+    public void runTimeTask(Date desiredDate, Date now, Scenario scenario) {
+        if (desiredDate.after(now)) {
+            log.debug("scenario" + scenario.getAliasName()
+                    + " __ commandID - " + scenario.getCommandId() + " событие не наступило");
+        } else {
+            log.debug("scenarioId" + scenario.getAliasName()
+                    + " __ commandID - " + scenario.getCommandId() + " событие наступило!");
 
-        }, delay, TimeUnit.MILLISECONDS); // run in "delay" millis
+            toggleDevice(scenario.getId());
+        }
+
     }
 
 
@@ -106,6 +91,27 @@ public class ScenarioController {
         return null;
     }
 
+    public String toggleDevice(Long scenarioId) {
+        Scenario scenario = scenarioService.getScenario(scenarioId);
+        Long deviceId = scenario.getDeviceId();
+        String toggle = "";
+        if (scenario.getCommandId() == 1) {
+            toggle = "on";
+        }
+        if (scenario.getCommandId() == 0) {
+            toggle = "off";
+        }
+
+        String url = "http://device-service/devices/" + toggle + "/" +
+                "?id=" + deviceId;
+        log.info(url);
+
+        scenario.setStatus(Status.NOT_ACTIVE);
+        //todo update status to database
+
+        return restTemplate.getForObject(url, String.class);
+    }
+
 
     public LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
@@ -119,19 +125,5 @@ public class ScenarioController {
                         .toInstant());
     }
 
-
-    public Date addHoursToJavaUtilDate(Date date, int hours) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.HOUR_OF_DAY, hours);
-        return calendar.getTime();
-    }
-
-    public Date addMinutesToJavaUtilDate(Date date, int minutes) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.MINUTE, minutes);
-        return calendar.getTime();
-    }
 
 }
