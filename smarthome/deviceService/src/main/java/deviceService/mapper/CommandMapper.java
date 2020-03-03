@@ -5,12 +5,14 @@ import deviceService.model.Command;
 import deviceService.repository.CommandRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Component
 public class CommandMapper extends AbstractMapper<Command, CommandDto> {
 
     private ModelMapper mapper;
