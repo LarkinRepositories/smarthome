@@ -12,7 +12,6 @@ import java.util.Calendar;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableScheduling
-
 public class ScenarioServiceApplication {
 
     public static void main(String[] args) {
