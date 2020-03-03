@@ -100,4 +100,15 @@ public class ScenarioServiceImpl implements ScenarioService {
         log.warn("In delete: scenario with id {} not found", id);
         return false;
     }
+
+    @Override
+    public boolean updateStatus(Long id) {
+        Scenario scenario = scenarioRepository.findById(id).orElse(null);
+        if (scenario != null) {
+            scenario.setStatus(Status.NOT_ACTIVE);
+            log.info("Status.NOT_ACTIVE");
+            return true;
+        }
+        return false;
+    }
 }

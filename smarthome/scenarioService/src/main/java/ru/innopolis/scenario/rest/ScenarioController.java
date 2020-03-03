@@ -3,6 +3,7 @@ package ru.innopolis.scenario.rest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,7 +63,7 @@ public class ScenarioController {
             log.debug("scenario" + scenario.getAliasName()
                     + " __ commandID - " + scenario.getCommandId() + " событие не наступило");
         } else {
-            log.debug("scenarioId" + scenario.getAliasName()
+            log.info("scenarioId" + scenario.getAliasName()
                     + " __ commandID - " + scenario.getCommandId() + " событие наступило!");
 
             toggleDevice(scenario.getId());
@@ -91,24 +92,24 @@ public class ScenarioController {
         return null;
     }
 
+    @PostMapping("/scenario/toggle")
     public String toggleDevice(Long scenarioId) {
         Scenario scenario = scenarioService.getScenario(scenarioId);
         Long deviceId = scenario.getDeviceId();
         String toggle = "";
         if (scenario.getCommandId() == 1) {
             toggle = "on";
+           // scenarioService.updateStatus(scenarioId);
         }
         if (scenario.getCommandId() == 0) {
             toggle = "off";
+           // scenarioService.updateStatus(scenarioId);
         }
 
         String url = "http://device-service/devices/" + toggle + "/" +
                 "?id=" + deviceId;
         log.info(url);
-
-        scenario.setStatus(Status.NOT_ACTIVE);
-        //todo update status to database
-
+      //  return null;
         return restTemplate.getForObject(url, String.class);
     }
 
