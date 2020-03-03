@@ -25,30 +25,30 @@ public class TypeMapper extends AbstractMapper<Type, TypeDto> {
         this.typeRepository = repository;
     }
 
-    @PostConstruct
-    public void setupMapper() {
-        mapper.createTypeMap(Type.class, TypeDto.class)
-        .addMappings(e -> e.skip(TypeDto::setDevicesIds)).setPostConverter(toDtoConverter());
-        mapper.createTypeMap(TypeDto.class, Type.class)
-                .addMappings(e -> e.skip(Type::setDevices)).setPostConverter(toEntityConverter());
-    }
-
-    @Override
-    protected void mapSpecificFields(Type source, TypeDto destination) {
-        destination.setDevicesIds(getIds(source));
-    }
-
-
-    @Override
-    protected void mapSpecificFields(TypeDto source, Type destination) {
-        destination.setDevices(Objects.requireNonNull(typeRepository.findById(source.getId()).orElse(null)).getDevices());
-    }
-
-    private List<Long> getIds(Type source) {
-        List<Long> idList = new ArrayList<>();
-        source.getDevices().forEach(e -> idList.add(e.getId()));
-        return idList;
-    }
+//    @PostConstruct
+//    public void setupMapper() {
+//        mapper.createTypeMap(Type.class, TypeDto.class)
+//        .addMappings(e -> e.skip(TypeDto::setDevicesIds)).setPostConverter(toDtoConverter());
+//        mapper.createTypeMap(TypeDto.class, Type.class)
+//                .addMappings(e -> e.skip(Type::setDevices)).setPostConverter(toEntityConverter());
+//    }
+//
+//    @Override
+//    protected void mapSpecificFields(Type source, TypeDto destination) {
+//        destination.setDevicesIds(getIds(source));
+//    }
+//
+//
+//    @Override
+//    protected void mapSpecificFields(TypeDto source, Type destination) {
+//        destination.setDevices(Objects.requireNonNull(typeRepository.findById(source.getId()).orElse(null)).getDevices());
+//    }
+//
+//    private List<Long> getIds(Type source) {
+//        List<Long> idList = new ArrayList<>();
+//        source.getDevices().forEach(e -> idList.add(e.getId()));
+//        return idList;
+//    }
 
 
 

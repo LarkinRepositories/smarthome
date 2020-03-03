@@ -2,11 +2,17 @@ package deviceService.service.impl;
 
 import deviceService.dto.DeviceDto;
 import deviceService.mapper.DeviceMapper;
+import deviceService.model.Device;
+import deviceService.model.Status;
 import deviceService.repository.DeviceRepository;
 import deviceService.service.DeviceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -22,7 +28,18 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDto addDevice(DeviceDto deviceDto) {
+        deviceDto.setCreated(LocalDateTime.now());
+        deviceDto.setUpdated(LocalDateTime.now());
+        deviceDto.setStatus(Status.ACTIVE);
         return mapper.toDto(deviceRepository.save(mapper.toEntity(deviceDto)));
+    }
+
+    @Override
+    public List<DeviceDto> findAllByUserId(Long userId) {
+        List<Device> devices = deviceRepository.findAllDevicesByUserId(userId);
+        List<DeviceDto> deviceDtos = new ArrayList<>();
+        devices.forEach(e -> deviceDtos.add(mapper.toDto(e)));
+        return deviceDtos;
     }
 
     //    private TypeRepository typeRepository;

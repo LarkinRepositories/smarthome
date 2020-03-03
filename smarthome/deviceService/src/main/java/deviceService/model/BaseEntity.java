@@ -15,7 +15,7 @@ import java.util.Date;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @CreatedDate
     @Column(name = "created")
     private LocalDateTime created;

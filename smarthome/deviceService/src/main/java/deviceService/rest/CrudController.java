@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,9 +35,15 @@ public class CrudController {
 //       /List<Device> devices = Arrays.asList(new Device(1, "TOKEN1", Collections.emptyList()), new Device(1, "TOKEN2", Collections.emptyList()));
 //       return devices;
 
-    @GetMapping("/devices/add/")
+    @PostMapping("/devices/add/")
     public DeviceDto addDevice(@RequestBody DeviceDto deviceDto) {
         return deviceService.addDevice(deviceDto);
+    }
+
+    @GetMapping("/devices/get/{id}")
+    public List<DeviceDto> getDevices(@PathVariable String id) {
+        Long userId = Long.valueOf(id);
+        return deviceService.findAllByUserId(userId);
     }
 
 //    @GetMapping("/devices/get/")

@@ -15,8 +15,8 @@ public class BaseEntityDto {
 //    @JsonIgnore
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime updated;
-    @JsonIgnore
-//    @JsonFormat(shape=JsonFormat.Shape.STRING)
+//    @JsonIgnore
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     private Status status;
 
 }

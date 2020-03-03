@@ -21,7 +21,7 @@ public class DeviceDto extends BaseEntityDto {
      private Integer port;
      private Long userId;
      private String token;
-     private List<TypeDto> types;
-     private List<CommandDto> commands;
+     private String[] types;
+     private String[] commands;
 
 }

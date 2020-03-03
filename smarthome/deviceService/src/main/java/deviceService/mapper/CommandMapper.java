@@ -24,32 +24,32 @@ public class CommandMapper extends AbstractMapper<Command, CommandDto> {
         this.mapper = mapper;
         this.repository = repository;
     }
-
-    @PostConstruct
-    public void setupMapper() {
-        mapper.createTypeMap(Command.class, CommandDto.class)
-                .addMappings(e-> e.skip(CommandDto::setDevicesIds))
-                .setPostConverter(toDtoConverter());
-        mapper.createTypeMap(CommandDto.class, Command.class)
-                .addMappings(e -> e.skip(Command::setDevices)).setPostConverter(toEntityConverter());
-    }
-
-    @Override
-    protected void mapSpecificFields(Command source, CommandDto destination) {
-        destination.setDevicesIds(getIds(source));
-    }
-
-    @Override
-    protected void mapSpecificFields(CommandDto source, Command destination) {
-        destination.
-                setDevices(Objects.requireNonNull(repository.findById(source.getId()).orElse(null))
-                        .getDevices());
-    }
-
-    private List<Long> getIds(Command source) {
-        List<Long> idList = new ArrayList<>();
-        source.getDevices().forEach(e -> idList.add(e.getId()));
-        return idList;
-    }
+//
+//    @PostConstruct
+//    public void setupMapper() {
+//        mapper.createTypeMap(Command.class, CommandDto.class)
+//                .addMappings(e-> e.skip(CommandDto::setDevicesIds))
+//                .setPostConverter(toDtoConverter());
+//        mapper.createTypeMap(CommandDto.class, Command.class)
+//                .addMappings(e -> e.skip(Command::setDevices)).setPostConverter(toEntityConverter());
+//    }
+//
+//    @Override
+//    protected void mapSpecificFields(Command source, CommandDto destination) {
+//        destination.setDevicesIds(getIds(source));
+//    }
+//
+//    @Override
+//    protected void mapSpecificFields(CommandDto source, Command destination) {
+//        destination.
+//                setDevices(Objects.requireNonNull(repository.findById(source.getId()).orElse(null))
+//                        .getDevices());
+//    }
+//
+//    private List<Long> getIds(Command source) {
+//        List<Long> idList = new ArrayList<>();
+//        source.getDevices().forEach(e -> idList.add(e.getId()));
+//        return idList;
+//    }
 
 }
