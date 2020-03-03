@@ -12,16 +12,11 @@ import java.util.Calendar;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableScheduling
-@Slf4j
+
 public class ScenarioServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ScenarioServiceApplication.class, args);
-    }
-
-    @Scheduled(cron = "*/9 * * * * ?")
-    public void run() {
-        log.info("Current time is :: " + Calendar.getInstance().getTime());
     }
 
 }

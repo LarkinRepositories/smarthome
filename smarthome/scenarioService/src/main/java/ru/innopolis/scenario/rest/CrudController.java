@@ -30,11 +30,13 @@ public class CrudController {
     @PostMapping("/scenarios/add/")
     public void addScenario(@RequestParam(name = "alias")String alias,
                             @RequestParam(name = "userId") Long userId,
-                            @RequestParam(name = "deviceId")Long deviceId) {
+                            @RequestParam(name = "deviceId")Long deviceId,
+                            @RequestParam(name = "commandId")Long commandId){
         Scenario scenario = new Scenario();
         scenario.setAliasName(alias);
         scenario.setUserId(userId);
         scenario.setDeviceId(deviceId);
+        scenario.setCommandId(commandId);
         scenarioService.addScenario(scenario);
     }
 
@@ -42,6 +44,7 @@ public class CrudController {
     public String updateScenario(@RequestParam(name = "id")Long id,
                                @RequestParam(name = "alias")String alias,
                                @RequestParam(name = "deviceId")Long deviceId,
+                             //    @RequestParam(name = "commandId")Long commandId,
                                @RequestParam(name = "types")List<String> types) {
         scenarioService.update(id, alias, deviceId, types);
         String resultString = "Scenario with id: "+id+" successfully updated";
