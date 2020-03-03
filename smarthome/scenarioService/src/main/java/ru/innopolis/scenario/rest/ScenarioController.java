@@ -55,4 +55,5 @@ public class ScenarioController {
         String resultString = "Scenario with id: "+id+" successfully deleted";
         return resultString;
     }
+
 }

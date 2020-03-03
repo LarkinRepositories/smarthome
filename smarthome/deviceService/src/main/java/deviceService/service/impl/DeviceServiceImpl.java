@@ -1,5 +1,6 @@
 package deviceService.service.impl;
 
+import deviceService.dto.DeviceMapper;
 import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.model.Status;
@@ -23,13 +24,15 @@ public class DeviceServiceImpl implements DeviceService {
     private DeviceRepository deviceRepository;
     private TypeRepository typeRepository;
     private CommandRepository commandRepository;
+    private DeviceMapper mapper;
 
     @Autowired
-    public DeviceServiceImpl(DeviceRepository deviceRepository, TypeRepository typeRepository, CommandRepository commandRepository) {
+    public DeviceServiceImpl(DeviceRepository deviceRepository, TypeRepository typeRepository, CommandRepository commandRepository, DeviceMapper mapper) {
 //    public DeviceServiceImpl(DeviceRepository deviceRepository) {
         this.deviceRepository = deviceRepository;
         this.typeRepository = typeRepository;
         this.commandRepository = commandRepository;
+        this.mapper = mapper;
     }
 
     @Override

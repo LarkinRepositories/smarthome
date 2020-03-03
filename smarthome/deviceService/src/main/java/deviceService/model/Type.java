@@ -13,6 +13,6 @@ import java.util.List;
 public class Type extends BaseEntity {
     @Column(name = "name")
     private String name;
-//    @ManyToMany(mappedBy = "types", fetch = FetchType.LAZY)
-//    private List<Device> devices;
+    @ManyToMany(mappedBy = "types", fetch = FetchType.LAZY)
+    private List<Device> devices;
 }

@@ -40,5 +40,6 @@ public class DeviceController {
                 "&commandId="+ commandId +
                 "&device=" + device.getAliasName();
         return restTemplate.getForObject(url, String.class);
+
     }
 }
