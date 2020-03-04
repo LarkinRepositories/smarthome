@@ -29,16 +29,18 @@ public class Device extends BaseEntity {
     private long userId;
     @Column(name = "token")
     private String token;
+    @Column(name = "operating")
+    Boolean operating;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "device_types",
             joinColumns = {@JoinColumn(name = "device_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "type_id", referencedColumnName = "id")})
     private List<Type> types;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "device_commands",
-               joinColumns = {@JoinColumn(name  = "device_id", referencedColumnName = "id")},
-               inverseJoinColumns = {@JoinColumn(name = "command_id", referencedColumnName = "id")})
-    private List<Command> commands;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "device_commands",
+//               joinColumns = {@JoinColumn(name  = "device_id", referencedColumnName = "id")},
+//               inverseJoinColumns = {@JoinColumn(name = "command_id", referencedColumnName = "id")})
+//    private List<Command> commands;
 //    @Transient
 //    private List<Object> scenarios;
 

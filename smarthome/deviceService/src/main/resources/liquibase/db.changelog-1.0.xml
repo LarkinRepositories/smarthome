@@ -22,6 +22,9 @@
             <column name="token" type="VARCHAR(255)">
                 <constraints nullable="false" unique="false" />
             </column>
+            <column name="operating" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false" unique="false"/>
+            </column>
             <column name="created" type="TIMESTAMP" defaultValue="now()">
                 <constraints nullable="false" />
             </column>
@@ -99,24 +102,24 @@
                                  referencedColumnNames="id" />
     </changeSet>
     <changeSet id="1.0.6" author="larkinds">
-        <createTable tableName="device_commands">
-            <column name="device_id" type="BIGINT" />
+        <createTable tableName="type_commands">
+            <column name="type_id" type="BIGINT" />
             <column name="command_id" type="BIGINT" />
         </createTable>
     </changeSet>
     <changeSet id="1.0.7" author="larkinds">
-        <addForeignKeyConstraint baseTableName="device_commands"
-                                 baseColumnNames="device_id"
-                                 constraintName="fk_device_commands_device"
+        <addForeignKeyConstraint baseTableName="type_commands"
+                                 baseColumnNames="type_id"
+                                 constraintName="fk_type_commands_type"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
-                                 referencedTableName="devices"
+                                 referencedTableName="types"
                                  referencedColumnNames="id" />
     </changeSet>
     <changeSet id="1.0.8" author="larkinds">
-        <addForeignKeyConstraint baseTableName="device_commands"
+        <addForeignKeyConstraint baseTableName="type_commands"
                                  baseColumnNames="command_id"
-                                 constraintName="fk_device_commands_command"
+                                 constraintName="fk_type_commands_command"
                                  onUpdate="CASCADE"
                                  onDelete="RESTRICT"
                                  referencedTableName="commands"
@@ -138,6 +141,26 @@
         <insert tableName="commands">
             <column name="name" value="OFF" />
             <column name="command_id" value="0" />
+        </insert>
+    </changeSet>
+    <changeSet id="1.0.11" author="larkinds">
+        <insert tableName="type_commands">
+            <column name="type_id" value="1" />
+            <column name="command_id" value="1" />
+        </insert>
+        <insert tableName="type_commands">
+            <column name="type_id" value="1" />
+            <column name="command_id" value="2" />
+        </insert>
+    </changeSet>
+    <changeSet id="1.0.12" author="larkinds">
+        <insert tableName="type_commands">
+            <column name="type_id" value="2" />
+            <column name="command_id" value="1" />
+        </insert>
+        <insert tableName="type_commands">
+            <column name="type_id" value="2" />
+            <column name="command_id" value="2" />
         </insert>
     </changeSet>
 </databaseChangeLog>

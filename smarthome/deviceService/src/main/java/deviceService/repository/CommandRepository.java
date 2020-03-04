@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface CommandRepository extends JpaRepository<Command, Long> {
    Command findByName(String name);
 
+
 }

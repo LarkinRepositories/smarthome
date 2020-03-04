@@ -30,13 +30,14 @@ public class CrudController {
     @PostMapping("/scenarios/add/")
     public void addScenario(@RequestParam(name = "alias")String alias,
                             @RequestParam(name = "userId") Long userId,
-                            @RequestParam(name = "deviceId")Long deviceId,
-                            @RequestParam(name = "commandId")Long commandId){
+                            @RequestParam(name = "deviceId")Long deviceId
+//                            ,@RequestParam(name = "commandId")Long commandId){
+    ) {
         Scenario scenario = new Scenario();
         scenario.setAliasName(alias);
         scenario.setUserId(userId);
         scenario.setDeviceId(deviceId);
-        scenario.setCommandId(commandId);
+//        scenario.setCommandId(commandId);
         scenarioService.addScenario(scenario);
     }
 

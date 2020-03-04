@@ -26,8 +26,8 @@ public class Scenario extends BaseEntity{
     private long userId;
     @Column(name = "device_id")
     private long deviceId;
-    @Column(name = "command_id")
-    private long commandId;
+//    @Column(name = "command_id")
+//    private long commandId;
     @Column(name = "run_time")
     private LocalDateTime runTime;
 

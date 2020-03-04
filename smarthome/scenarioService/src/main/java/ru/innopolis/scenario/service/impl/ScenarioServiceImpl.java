@@ -107,6 +107,7 @@ public class ScenarioServiceImpl implements ScenarioService {
         if (scenario != null) {
             scenario.setStatus(Status.NOT_ACTIVE);
             log.info("Status.NOT_ACTIVE");
+            scenarioRepository.save(scenario);
             return true;
         }
         return false;
