@@ -30,7 +30,7 @@ public class Device extends BaseEntity {
     @Column(name = "token")
     private String token;
     @Column(name = "operating")
-    boolean operating;
+    Boolean operating;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "device_types",
             joinColumns = {@JoinColumn(name = "device_id", referencedColumnName = "id")},

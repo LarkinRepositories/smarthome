@@ -33,11 +33,11 @@ public class ScenarioController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private int MINUTES_TO_ADD = 1;
+    private final int MINUTES_TO_ADD = 1;
     boolean runOnce = false;
 
 
-    @Scheduled(cron = "0/2 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void runScenario() {
 
         Date nowDate = new Date();
@@ -114,19 +114,24 @@ public class ScenarioController {
     @PostMapping("/scenario/toggle/")
     public Boolean toggleDevice(@RequestParam(name="id") Long scenarioId) {
         Scenario scenario = scenarioService.getScenario(scenarioId);
-        Long id = scenario.getDeviceId();
-        Boolean toggle = null;
+        long id = scenario.getDeviceId();
         String url = "http://device-service/devices/device/isOp/?id=" + id;
-        toggle = restTemplate.getForObject(url, Boolean.class);
+        Boolean toggle = restTemplate.getForObject(url, Boolean.class);
         if (toggle != null) {
             String response = null;
-            if(!toggle){
+            if (!toggle) {
                 response = restTemplate.getForObject("http://device-service/devices/on/?id="+id, String.class);
+                log.info(response);
                 scenarioService.updateStatus(scenarioId);
+                toggle = restTemplate.getForObject(url, Boolean.class);
+                log.warn(toggle.toString());
             }
             else {
-                response = restTemplate.getForObject("http://device-service/devices/on/?id="+id, String.class);
+                response = restTemplate.getForObject("http://device-service/devices/off/?id="+id, String.class);
+                log.info(response);
                 scenarioService.updateStatus(scenarioId);
+                toggle = restTemplate.getForObject(url, Boolean.class);
+                log.warn(toggle.toString());
             }
         }
         return toggle;

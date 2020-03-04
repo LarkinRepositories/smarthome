@@ -4,12 +4,14 @@ import deviceService.dto.DeviceDto;
 import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.service.DeviceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class DeviceController {
     @Autowired
     private DeviceService deviceService;
@@ -27,6 +29,10 @@ public class DeviceController {
                 "&port=" + deviceDto1.getPort() +
                 "&commandId="+ commandId +
                 "&device=" + deviceDto1.getAliasName();
+        log.debug("IN ON BEFORE deviceDTO: {}",deviceDto1.toString());
+        deviceDto1.setOperating(true);
+        log.debug("IN ON AFTER deviceDTO: {}", deviceDto1.toString());
+        deviceService.update(deviceDto1);
         return restTemplate.getForObject(url, String.class);
     }
 
@@ -41,6 +47,10 @@ public class DeviceController {
                 "&port=" + deviceDto1.getPort() +
                 "&commandId="+ commandId +
                 "&device=" + deviceDto.getAliasName();
+        log.warn(deviceDto1.toString());
+        deviceDto1.setOperating(false);
+        log.warn(deviceDto1.toString());
+        deviceService.update(deviceDto1);
         return restTemplate.getForObject(url, String.class);
 
     }
@@ -50,7 +60,6 @@ public class DeviceController {
         DeviceDto deviceDto = new DeviceDto();
         deviceDto.setId(deviceId);
         DeviceDto deviceDto1 = deviceService.getDevice(deviceDto);
-        Boolean operating = deviceDto1.getOperating();
-        return operating;
+        return deviceDto1.getOperating();
     }
 }
