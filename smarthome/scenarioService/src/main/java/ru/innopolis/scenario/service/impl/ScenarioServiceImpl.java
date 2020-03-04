@@ -50,6 +50,12 @@ public class ScenarioServiceImpl implements ScenarioService {
     }
 
     @Override
+    public Scenario getScenario(Long id) {
+        Scenario scenario = scenarioRepository.findById(id).orElse(null);
+        return scenario;
+    }
+
+    @Override
     public List<Scenario> findByUserId(Long userId) {
         List<Scenario> scenarios = scenarioRepository.findAllByUserId(userId);
         log.info("In findByUserId - {} scenarios found with userId: {}", scenarios.size(), userId);
@@ -92,6 +98,17 @@ public class ScenarioServiceImpl implements ScenarioService {
             return true;
         }
         log.warn("In delete: scenario with id {} not found", id);
+        return false;
+    }
+
+    @Override
+    public boolean updateStatus(Long id) {
+        Scenario scenario = scenarioRepository.findById(id).orElse(null);
+        if (scenario != null) {
+            scenario.setStatus(Status.NOT_ACTIVE);
+            log.info("Status.NOT_ACTIVE");
+            return true;
+        }
         return false;
     }
 }

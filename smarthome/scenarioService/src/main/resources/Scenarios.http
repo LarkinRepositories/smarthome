@@ -1,0 +1,15 @@
+#get all scenarios
+#GET http://127.0.0.1:14100/scenarios/get/?userId=1
+GET http://127.0.0.1:8762/api/scenario/scenarios/get/?userId=1
+###
+#create  scheduled light on
+POST http://localhost:8762/api/scenario/scenarios/add/?alias=scheduled on&userId=1&deviceId=1&commandId=1
+###
+#create  scheduled light off
+POST http://localhost:8762/api/scenario/scenarios/add/?alias=scheduled off&userId=1&deviceId=1&commandId=0
+###
+#create temp scenario
+POST http://localhost:8762/api/scenario/scenarios/add/?alias=temp scenario&userId=1&deviceId=1&commandId=0
+
+###
+
