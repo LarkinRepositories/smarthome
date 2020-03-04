@@ -104,7 +104,8 @@ public class DeviceMapper extends AbstractMapper<Device, DeviceDto> {
         List<Command> list1 = commands.stream().distinct().collect(Collectors.toList());
         String[] strings = new String[list1.size()];
         for (int i = 0; i < strings.length; i++) {
-             strings[i] = String.valueOf(commandRepository.findById(list1.get(i).getId()));
+             strings[i] = String.valueOf(commandRepository.findById(list1.get(i).getId()).orElse(null).getCommandId());
+
         }
         return strings;
     }
