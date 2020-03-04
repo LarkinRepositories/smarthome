@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -44,18 +45,22 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public boolean update(DeviceDto deviceDto) {
-        if (deviceRepository.findById(deviceDto.getId()).isPresent()) {
-            deviceDto.setUpdated(LocalDateTime.now());
-            deviceRepository.save(mapper.toEntity(deviceDto));
-            return true;
-        }
-        return false;
+       Device device = deviceRepository.findById(deviceDto.getId()).orElse(null);
+         if (device != null) {
+           deviceDto.setCreated(device.getCreated());
+           deviceDto.setUpdated(LocalDateTime.now());
+           deviceRepository.save(mapper.toEntity(deviceDto));
+           return true;
+         }
+       return false;
     }
 
     @Override
     public boolean delete(DeviceDto deviceDto) {
-        if (deviceRepository.findById(deviceDto.getId()).isPresent()) {
+        Device device = deviceRepository.findById(deviceDto.getId()).orElse(null);
+        if (device != null)  {
             deviceDto.setStatus(Status.DELETED);
+            deviceDto.setCreated(device.getCreated());
             deviceDto.setUpdated(LocalDateTime.now());
             deviceRepository.save(mapper.toEntity(deviceDto));
             return true;
