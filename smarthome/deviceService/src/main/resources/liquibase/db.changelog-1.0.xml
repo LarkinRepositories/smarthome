@@ -22,6 +22,9 @@
             <column name="token" type="VARCHAR(255)">
                 <constraints nullable="false" unique="false" />
             </column>
+            <column name="operating" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false" unique="false"/>
+            </column>
             <column name="created" type="TIMESTAMP" defaultValue="now()">
                 <constraints nullable="false" />
             </column>

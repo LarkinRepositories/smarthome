@@ -78,8 +78,7 @@ public class ScenarioController {
         String url = "http://device-service/devices/on/" +
                 "?id=" + deviceId;
         log.info(url);
-        return null;
-        //return restTemplate.getForObject(url, String.class);
+        return restTemplate.getForObject(url, String.class);
     }
 
     public String turnDeviceOff(Long scenarioId) {
@@ -88,8 +87,7 @@ public class ScenarioController {
         String url = "http://device-service/devices/off/" +
                 "?id=" + deviceId;
         log.info(url);
-        //return restTemplate.getForObject(url, String.class);
-        return null;
+        return restTemplate.getForObject(url, String.class);
     }
 
     @PostMapping("/scenario/toggle")
