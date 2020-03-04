@@ -30,9 +30,9 @@ public class RestOutController {
 //        return sendGet("192.168.1.93", true);
 //    }
 
-    @PostMapping("/")
-    public void restDo(@RequestParam(name="ip")String ip, @RequestParam(name="commandId") Long commandId) throws Exception {
-        sendGet(ip,commandId);
+    @RequestMapping("/test/do/")
+    public String restDo(@RequestParam(name="ip")String ip, @RequestParam(name="commandId") Long commandId) throws Exception {
+        return "REST-OUT: " + sendGet(ip,commandId);
     }
 
 //    @RequestMapping("/restOff")

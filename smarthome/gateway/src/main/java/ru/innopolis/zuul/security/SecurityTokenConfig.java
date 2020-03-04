@@ -41,6 +41,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                  .antMatchers("/api/device/**")
                  .antMatchers("/api/scenario/**")
                  .antMatchers("/api/mqtt/**")
+                 .antMatchers("/api/rest-out/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 

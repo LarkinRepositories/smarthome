@@ -24,11 +24,19 @@ public class DeviceController {
         deviceDto.setId(deviceId);
         DeviceDto deviceDto1 = deviceService.getDevice(deviceDto);
         long commandId = Long.parseLong(deviceDto1.getCommands()[0]);
-        String url = "http://mqtt-service/test/on/" +
-                "?ip=" + deviceDto1.getIp() +
-                "&port=" + deviceDto1.getPort() +
-                "&commandId="+ commandId +
-                "&device=" + deviceDto1.getAliasName();
+        String url = "";
+        if (deviceDto1.getTypes().length == 1 && deviceDto1.getTypes()[0].equals("1")) {
+            url="http://rest-service-out/test/do/" +
+                    "?ip=" + deviceDto1.getIp() +
+                    "&commandId=" + deviceDto1.getCommands()[0];
+                    //Long.valueOf(deviceDto1.getCommands()[0]);
+        } else {
+            url = "http://mqtt-service/test/on/" +
+                    "?ip=" + deviceDto1.getIp() +
+                    "&port=" + deviceDto1.getPort() +
+                    "&commandId=" + commandId +
+                    "&device=" + deviceDto1.getAliasName();
+        }
         log.debug("IN ON BEFORE deviceDTO: {}",deviceDto1.toString());
         deviceDto1.setOperating(true);
         log.debug("IN ON AFTER deviceDTO: {}", deviceDto1.toString());
