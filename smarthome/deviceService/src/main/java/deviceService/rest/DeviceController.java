@@ -5,10 +5,7 @@ import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -19,7 +16,7 @@ public class DeviceController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @PostMapping("/devices/on/")
+    @RequestMapping("/devices/on/")
     public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {
         DeviceDto deviceDto = new DeviceDto();
         deviceDto.setId(deviceId);
@@ -33,7 +30,7 @@ public class DeviceController {
         return restTemplate.getForObject(url, String.class);
     }
 
-    @PostMapping("/devices/off/")
+    @RequestMapping("/devices/off/")
     public String turnDeviceOff(@RequestParam(name ="id")Long deviceId) {
         DeviceDto deviceDto = new DeviceDto();
         deviceDto.setId(deviceId);
@@ -46,5 +43,14 @@ public class DeviceController {
                 "&device=" + deviceDto.getAliasName();
         return restTemplate.getForObject(url, String.class);
 
+    }
+
+    @GetMapping("/devices/device/isOp/")
+    public Boolean isDeviceOperating(@RequestParam(name="id")Long deviceId) {
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        DeviceDto deviceDto1 = deviceService.getDevice(deviceDto);
+        Boolean operating = deviceDto1.getOperating();
+        return operating;
     }
 }

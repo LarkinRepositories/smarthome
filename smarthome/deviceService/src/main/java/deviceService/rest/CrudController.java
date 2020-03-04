@@ -49,7 +49,7 @@ public class CrudController {
         return deviceService.findAllByUserId(userId);
     }
 
-    @PostMapping("/devices/update/{id}")
+    @PostMapping("/devices/device/update/{id}")
     public boolean updateDevice(@PathVariable String id, @RequestBody DeviceDto deviceDto) {
 //    @PostMapping("/devices/update/")
 //    public boolean updateDevice(@RequestParam(name = "id")Long id, @RequestBody DeviceDto deviceDto) {

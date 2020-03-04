@@ -60,11 +60,11 @@ public class ScenarioController {
 
     public void runTimeTask(Date desiredDate, Date now, Scenario scenario) {
         if (desiredDate.after(now)) {
-            log.debug("scenario" + scenario.getAliasName()
-                    + " __ commandID - " + scenario.getCommandId() + " событие не наступило");
+//            log.debug("scenario" + scenario.getAliasName()
+//                    + " __ commandID - " + scenario.getCommandId() + " событие не наступило");
         } else {
-            log.info("scenarioId" + scenario.getAliasName()
-                    + " __ commandID - " + scenario.getCommandId() + " событие наступило!");
+//            log.info("scenarioId" + scenario.getAliasName()
+//                    + " __ commandID - " + scenario.getCommandId() + " событие наступило!");
 
             toggleDevice(scenario.getId());
         }
@@ -90,27 +90,47 @@ public class ScenarioController {
         return restTemplate.getForObject(url, String.class);
     }
 
-    @PostMapping("/scenario/toggle")
-    public String toggleDevice(Long scenarioId) {
+//    @PostMapping("/scenario/toggle")
+//    public String toggleDevice(Long scenarioId) {
+//        Scenario scenario = scenarioService.getScenario(scenarioId);
+//        Long deviceId = scenario.getDeviceId();
+//        String toggle = "";
+//        if (scenario.getCommandId() == 1) {
+//            toggle = "on";
+//            // scenarioService.updateStatus(scenarioId);
+//        }
+//        if (scenario.getCommandId() == 0) {
+//            toggle = "off";
+//            // scenarioService.updateStatus(scenarioId);
+//        }
+//
+//        String url = "http://device-service/devices/" + toggle + "/" +
+//                "?id=" + deviceId;
+//        log.info(url);
+//        //  return null;
+//        return restTemplate.getForObject(url, String.class);
+//    }
+
+    @PostMapping("/scenario/toggle/")
+    public Boolean toggleDevice(@RequestParam(name="id") Long scenarioId) {
         Scenario scenario = scenarioService.getScenario(scenarioId);
-        Long deviceId = scenario.getDeviceId();
-        String toggle = "";
-        if (scenario.getCommandId() == 1) {
-            toggle = "on";
-            // scenarioService.updateStatus(scenarioId);
+        Long id = scenario.getDeviceId();
+        Boolean toggle = null;
+        String url = "http://device-service/devices/device/isOp/?id=" + id;
+        toggle = restTemplate.getForObject(url, Boolean.class);
+        if (toggle != null) {
+            String response = null;
+            if(!toggle){
+                response = restTemplate.getForObject("http://device-service/devices/on/?id="+id, String.class);
+                scenarioService.updateStatus(scenarioId);
+            }
+            else {
+                response = restTemplate.getForObject("http://device-service/devices/on/?id="+id, String.class);
+                scenarioService.updateStatus(scenarioId);
+            }
         }
-        if (scenario.getCommandId() == 0) {
-            toggle = "off";
-            // scenarioService.updateStatus(scenarioId);
-        }
-
-        String url = "http://device-service/devices/" + toggle + "/" +
-                "?id=" + deviceId;
-        log.info(url);
-        //  return null;
-        return restTemplate.getForObject(url, String.class);
+        return toggle;
     }
-
 
     public LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
