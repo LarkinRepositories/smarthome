@@ -1,5 +1,6 @@
 package deviceService.rest;
 
+import deviceService.dto.DeviceDto;
 import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.service.DeviceService;
@@ -20,25 +21,30 @@ public class DeviceController {
 
     @PostMapping("/devices/on/")
     public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {
-        Device device = deviceService.getDevice(deviceId);
-        Long commandId = device.getCommands().get(0).getCommandId();
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        DeviceDto deviceDto1 = deviceService.getDevice(deviceDto);
+        long commandId = Long.parseLong(deviceDto1.getCommands()[0]);
         String url = "http://mqtt-service/test/on/" +
-                "?ip=" + device.getIp() +
-                "&port=" + device.getPort() +
+                "?ip=" + deviceDto1.getIp() +
+                "&port=" + deviceDto1.getPort() +
                 "&commandId="+ commandId +
-                "&device=" + device.getAliasName();
+                "&device=" + deviceDto1.getAliasName();
         return restTemplate.getForObject(url, String.class);
     }
 
     @PostMapping("/devices/off/")
     public String turnDeviceOff(@RequestParam(name ="id")Long deviceId) {
-        Device device = deviceService.getDevice(deviceId);
-        Long commandId = device.getCommands().get(1).getCommandId();
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        DeviceDto deviceDto1 = deviceService.getDevice(deviceDto);
+        long commandId = Long.parseLong(deviceDto1.getCommands()[1]);
         String url = "http://mqtt-service/test/off/" +
-                "?ip=" + device.getIp() +
-                "&port=" + device.getPort() +
+                "?ip=" + deviceDto1.getIp() +
+                "&port=" + deviceDto1.getPort() +
                 "&commandId="+ commandId +
-                "&device=" + device.getAliasName();
+                "&device=" + deviceDto.getAliasName();
         return restTemplate.getForObject(url, String.class);
+
     }
 }

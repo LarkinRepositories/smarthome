@@ -99,17 +99,17 @@ public class ScenarioController {
         String toggle = "";
         if (scenario.getCommandId() == 1) {
             toggle = "on";
-           // scenarioService.updateStatus(scenarioId);
+            // scenarioService.updateStatus(scenarioId);
         }
         if (scenario.getCommandId() == 0) {
             toggle = "off";
-           // scenarioService.updateStatus(scenarioId);
+            // scenarioService.updateStatus(scenarioId);
         }
 
         String url = "http://device-service/devices/" + toggle + "/" +
                 "?id=" + deviceId;
         log.info(url);
-      //  return null;
+        //  return null;
         return restTemplate.getForObject(url, String.class);
     }
 
@@ -125,6 +125,4 @@ public class ScenarioController {
                 .from(dateToConvert.atZone(ZoneId.systemDefault())
                         .toInstant());
     }
-
-
 }
