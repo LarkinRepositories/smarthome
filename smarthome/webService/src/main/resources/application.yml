@@ -7,7 +7,7 @@ spring:
       suffix: .jsp
     static-path-pattern: /resources/**
 server:
-  port: 10100
+  port: 80
 
 eureka:
   client:
