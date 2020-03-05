@@ -1,6 +1,7 @@
 package deviceService.rest;
 
 
+import deviceService.model.Device;
 import deviceService.service.DeviceService;
 import dto.deviceservice.entities.DeviceDto;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,24 @@ public class DeviceController {
     private DeviceService deviceService;
     @Autowired
     private RestTemplate restTemplate;
+
+
+
+    @GetMapping("/devices/do-command/")
+    public String doCommand(@RequestParam(name = "id")Long deviceId, Long commandId) {
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        deviceDto = deviceService.getDevice(deviceDto);
+        String url = "http://mqtt-service/test/do-command/"+
+                "?ip=" + deviceDto.getIp() +
+                "&port=" + deviceDto.getPort() +
+                "&commandId=" + commandId +
+                "&device=" + deviceDto.getAliasName();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+
+
 
     @RequestMapping("/devices/on/")
     public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {

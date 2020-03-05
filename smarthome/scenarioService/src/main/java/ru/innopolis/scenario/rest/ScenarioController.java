@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import ru.innopolis.scenario.mapper.ScenarioMapper;
 import ru.innopolis.scenario.model.Scenario;
 import ru.innopolis.scenario.model.Status;
 import ru.innopolis.scenario.service.ScenarioService;
@@ -35,7 +36,8 @@ public class ScenarioController {
     private ScenarioService scenarioService;
     @Autowired
     private RestTemplate restTemplate;
-
+    @Autowired
+    private ScenarioMapper mapper;
     private final int MINUTES_TO_ADD = 1;
     boolean runOnce = false;
 
@@ -68,15 +70,20 @@ public class ScenarioController {
 //        } else {
 ////            log.info("scenarioId" + scenario.getAliasName()
 ////                    + " __ commandID - " + scenario.getCommandId() + " событие наступило!");
-//
-//            toggleDevice(scenario.getId());
+
+            doCommand(scenario);
+            scenario.setStatus(Status.NOT_ACTIVE);
+            scenarioService.update(mapper.toDto(scenario));
 //        }
 
     }
 
 
-    private String doCommand(ScenarioDto scenarioDto) {
-        return "";
+    private void doCommand(Scenario scenario) {
+        String result = restTemplate.getForObject("http://device-service/devices/do-command/?id="
+                +scenario.getDeviceId() +
+                "&commandId="+scenario.getCommandId(), String.class);
+        log.info(result);
     }
 
 
