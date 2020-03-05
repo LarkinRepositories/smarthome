@@ -1,18 +1,12 @@
 package deviceService.rest;
 
-import deviceService.dto.DeviceDto;
-import deviceService.model.Device;
-import deviceService.model.Status;
 import deviceService.service.DeviceService;
-import liquibase.pro.packaged.D;
+import dto.deviceservice.entities.DeviceDto;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @RestController

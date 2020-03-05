@@ -1,10 +1,10 @@
-package deviceService.mapper;
+package ru.innopolis.authService.mapper;
 
-import deviceService.model.BaseEntity;
 import dto.base.BaseEntityDto;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.innopolis.authService.model.BaseEntity;
 
 import java.util.Objects;
 

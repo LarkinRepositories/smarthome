@@ -1,5 +1,6 @@
-package deviceService.dto;
+package dto.deviceservice.entities;
 
+import dto.base.BaseEntityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,8 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommandDto extends BaseEntityDto {
+public class TypeDto extends BaseEntityDto {
     private String name;
-    private Long commandId;
-    List<Long> devicesIds;
+    private List<Long> devicesIds;
 }

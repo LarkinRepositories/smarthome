@@ -1,7 +1,8 @@
-package deviceService.mapper;
+package ru.innopolis.scenario.mapper;
 
-import deviceService.model.BaseEntity;
+
 import dto.base.BaseEntityDto;
+import ru.innopolis.scenario.model.BaseEntity;
 
 public interface Mapper<E extends BaseEntity, D extends BaseEntityDto> {
     E toEntity(D dto);
