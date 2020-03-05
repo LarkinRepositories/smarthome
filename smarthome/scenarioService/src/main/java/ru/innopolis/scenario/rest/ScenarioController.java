@@ -83,7 +83,7 @@ public class ScenarioController {
         String result = restTemplate.getForObject("http://device-service/devices/do-command/?id="
                 +scenario.getDeviceId() +
                 "&commandId="+scenario.getCommandId(), String.class);
-        log.info(result);
+        log.info(result); //11
     }
 
 
