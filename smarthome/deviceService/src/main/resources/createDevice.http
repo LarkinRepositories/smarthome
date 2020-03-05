@@ -1,17 +1,37 @@
 #create mqqt device
-POST http://localhost:8762/api/device/devices/add/?alias=sonoff&ip=192.168.1.1&port=1883&userId=1
+POST http://localhost:8762/api/device/devices/add
+{
+"aliasName":"mqttSonoff",
+"ip":"192.168.1.1",
+"port":"1883",
+"userId":"1",
+"token":"xaJADA1A",
+"types":"1",
+"status":"ACTIVE"
+}
 ###
-#create mqqt device
+#create rest device
 POST http://localhost:8762/api/device/devices/add/?alias=sonoff&ip=192.168.1.1&port=1883&userId=1
 ###
 #on
 POST http://localhost:8762/api/device/devices/on/?id=1
+
+###
+#on
+GET http://localhost:8762/api/device/devices/on/1
 ###
 #off
 POST http://localhost:8762/api/device/devices/off/?id=1
 
 ###
 #get devices by userId
-GET http://localhost:8762/api/device/devices/get/?userId=1
+GET http://localhost:8762/api/device/devices/get/4
+###
+#get devices by deviceID
+GET http://localhost:8762/api/device/devices/device/get/1
+
+###
+#device state
+GET http://localhost:8762/api/device/devices/device/isOp/?id=1
 
 ###
