@@ -1,7 +1,9 @@
 package ru.innopolis.scenario.rest;
 
+import dto.scenarioservice.entities.ScenarioDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import ru.innopolis.scenario.service.ScenarioService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +41,7 @@ public class ScenarioController {
 
 
     @Scheduled(cron = "0/5 * * * * ?")
-    public void runScenario() {
+    private void runScenario() {
 
         Date nowDate = new Date();
         List<Scenario> scenarioList = scenarioService.getAll();
@@ -69,6 +72,11 @@ public class ScenarioController {
 //            toggleDevice(scenario.getId());
 //        }
 
+    }
+
+
+    private String doCommand(ScenarioDto scenarioDto) {
+        return "";
     }
 
 

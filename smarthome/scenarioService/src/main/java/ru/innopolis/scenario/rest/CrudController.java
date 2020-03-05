@@ -33,9 +33,8 @@ public class CrudController {
     }
 
     @PostMapping("/scenarios/scenario/delete/{id}")
-    public ScenarioDto delete(@PathVariable String id, @RequestBody ScenarioDto scenarioDto) {
-        scenarioDto.setId(Long.parseLong(id));
-        return scenarioService.delete(scenarioDto);
+    public ScenarioDto delete(@PathVariable String id) {
+        return scenarioService.delete(Long.parseLong(id));
     }
 
     @GetMapping("/scenarios/scenario/get/{id}")

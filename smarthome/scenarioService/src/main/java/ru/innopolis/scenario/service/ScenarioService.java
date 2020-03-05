@@ -18,6 +18,6 @@ public interface ScenarioService {
     ScenarioDto addScenario(ScenarioDto scenarioDto);
     ScenarioDto update(ScenarioDto scenarioDto);
     ScenarioDto getScenario(Long id);
-    ScenarioDto delete(ScenarioDto scenarioDto);
+    ScenarioDto delete(Long id);
     List<Scenario> getAll();
 }

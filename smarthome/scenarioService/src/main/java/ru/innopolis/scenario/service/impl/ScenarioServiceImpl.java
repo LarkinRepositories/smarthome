@@ -53,9 +53,9 @@ public class ScenarioServiceImpl implements ScenarioService {
     }
 
     @Override
-    public ScenarioDto delete(ScenarioDto scenarioDto) {
+    public ScenarioDto delete(Long id) {
+        ScenarioDto scenarioDto = mapper.toDto(scenarioRepository.findById(id).orElse(null));
         scenarioDto.setStatus(Status.DELETED);
-        scenarioDto.setUpdated(LocalDateTime.now());
         return mapper.toDto(scenarioRepository.save(mapper.toEntity(scenarioDto)));
     }
 
