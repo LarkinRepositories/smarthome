@@ -18,6 +18,7 @@ import ru.innopolis.scenario.service.ScenarioService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -64,6 +65,12 @@ public class ScenarioServiceImpl implements ScenarioService {
         List<Scenario> scenarios = scenarioRepository.findAll();
         log.info("IN getAll - {} scenarios found", scenarios.size());
         return scenarios;
+    }
+
+    @Override
+    public List<ScenarioDto> getScenariosByUserId(Long id) {
+        return scenarioRepository.findAllByUserId(id).stream().map(e -> mapper.toDto(e)).collect(Collectors.toList());
+
     }
 
     //    @Override

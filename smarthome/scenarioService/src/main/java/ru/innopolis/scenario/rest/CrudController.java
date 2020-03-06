@@ -42,7 +42,10 @@ public class CrudController {
         return scenarioService.getScenario(Long.parseLong(id));
     }
 
-
+    @GetMapping("/scenarios/scenario/get/user/{id}")
+    public List<ScenarioDto> getByUserId(@PathVariable String id) {
+        return scenarioService.getScenariosByUserId(Long.parseLong(id));
+    }
 //    @GetMapping("/scenarios/get/")
 //    @LoadBalanced
 //    public List<Scenario> getScenarios(@RequestParam(name = "userId") Long userId) {

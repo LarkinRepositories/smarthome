@@ -20,4 +20,5 @@ public interface ScenarioService {
     ScenarioDto getScenario(Long id);
     ScenarioDto delete(Long id);
     List<Scenario> getAll();
+    List<ScenarioDto> getScenariosByUserId(Long id);
 }
