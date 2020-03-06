@@ -1,12 +1,15 @@
 package deviceService.rest;
 
-import deviceService.dto.DeviceDto;
-import deviceService.model.Command;
+
 import deviceService.model.Device;
 import deviceService.service.DeviceService;
+import dto.deviceservice.entities.DeviceDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -17,6 +20,24 @@ public class DeviceController {
     private DeviceService deviceService;
     @Autowired
     private RestTemplate restTemplate;
+
+
+
+    @GetMapping("/devices/do-command/")
+    public String doCommand(@RequestParam(name = "id")Long deviceId, Long commandId) {
+        DeviceDto deviceDto = new DeviceDto();
+        deviceDto.setId(deviceId);
+        deviceDto = deviceService.getDevice(deviceDto);
+        String url = "http://mqtt-service/test/do-command/"+
+                "?ip=" + deviceDto.getIp() +
+                "&port=" + deviceDto.getPort() +
+                "&commandId=" + commandId +
+                "&device=" + deviceDto.getAliasName();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+
+
 
     @RequestMapping("/devices/on/")
     public String turnDeviceOn(@RequestParam(name ="id")Long deviceId) {

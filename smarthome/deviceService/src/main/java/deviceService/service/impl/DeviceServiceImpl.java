@@ -1,11 +1,12 @@
 package deviceService.service.impl;
 
-import deviceService.dto.DeviceDto;
+
 import deviceService.mapper.DeviceMapper;
 import deviceService.model.Device;
-import deviceService.model.Status;
 import deviceService.repository.DeviceRepository;
 import deviceService.service.DeviceService;
+import dto.base.Status;
+import dto.deviceservice.entities.DeviceDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
