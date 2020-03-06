@@ -1,6 +1,5 @@
-package dto.deviceservice.entities;
+package deviceService.dto;
 
-import dto.base.BaseEntityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

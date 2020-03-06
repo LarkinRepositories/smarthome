@@ -12,5 +12,4 @@ include 'smsSendService'
 include 'mqttService'
 include 'eureka'
 include 'gateway'
-include 'common'
 
