@@ -1,5 +1,5 @@
-//package ru.innopolis.authService.config;
-//
+//package ru.innopolis.zuul.config;//package ru.innopolis.authService.config;
+////
 //import org.springframework.beans.factory.annotation.Value;
 //
 //public class JwtConfig {

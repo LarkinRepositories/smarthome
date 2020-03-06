@@ -1,10 +1,9 @@
-package ru.innopolis.authService.model;
+package ru.innopolis.zuul.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -27,7 +26,7 @@ public class User extends BaseEntity {
     @Column(name = "phone")
     private String phone;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable (name = "user_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id") },
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;

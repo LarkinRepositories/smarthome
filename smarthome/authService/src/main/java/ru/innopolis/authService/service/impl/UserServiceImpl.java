@@ -8,19 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.innopolis.authService.mapper.UserMapper;
+import ru.innopolis.authService.model.Role;
+//import ru.innopolis.authService.model.Status;
 import ru.innopolis.authService.model.User;
 import ru.innopolis.authService.repository.RoleRepository;
 import ru.innopolis.authService.repository.UserRepository;
 import ru.innopolis.authService.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
     private UserMapper mapper;
     private UserRepository userRepository;
-//    private RoleRepository roleRepository;
+    private RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -28,7 +32,7 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserMapper mapper, UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.mapper = mapper;
         this.userRepository = userRepository;
-//        this.roleRepository = roleRepository;
+        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findById(Long id) {
-        return null;
+        return mapper.toDto(userRepository.findById(id).orElse(null));
     }
 
     @Override
@@ -87,7 +91,7 @@ public class UserServiceImpl implements UserService {
 //        log.info("IN getAll - {} users found", users.size());
 //        return users;
 //    }
-//
+////
     @Override
     public User findByUsername(String username) {
         User result  = userRepository.findByUsername(username);
@@ -98,7 +102,7 @@ public class UserServiceImpl implements UserService {
         log.info("In findByUsername - user: {} found by username: {}", result, username);
         return result;
     }
-//
+
 //    @Override
 //    public User findById(Long id) {
 //        User result = userRepository.findById(id).orElse(null);

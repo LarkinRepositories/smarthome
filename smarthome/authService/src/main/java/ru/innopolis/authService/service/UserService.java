@@ -3,6 +3,8 @@ package ru.innopolis.authService.service;
 import dto.authservice.entities.UserDto;
 import ru.innopolis.authService.model.User;
 
+import java.util.List;
+
 public interface UserService {
 //    User register(User user);
 //    List<User> getAll();

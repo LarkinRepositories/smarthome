@@ -1,12 +1,13 @@
-package ru.innopolis.authService.rest;
+package ru.innopolis.zuul.rest;
 
 import dto.authservice.entities.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.innopolis.authService.service.UserService;
+import ru.innopolis.zuul.service.UserService;
+
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class CrudController {
     @Autowired
     private UserService userService;

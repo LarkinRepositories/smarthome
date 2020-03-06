@@ -1,4 +1,4 @@
-//package ru.innopolis.authService.config;
+//package ru.innopolis.zuul.config;//package ru.innopolis.authService.config;
 //
 //import org.modelmapper.ModelMapper;
 //import org.modelmapper.convention.MatchingStrategies;

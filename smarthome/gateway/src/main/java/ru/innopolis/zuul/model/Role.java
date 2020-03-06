@@ -1,4 +1,4 @@
-package ru.innopolis.authService.model;
+package ru.innopolis.zuul.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

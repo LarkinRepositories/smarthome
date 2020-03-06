@@ -35,7 +35,7 @@ public class DeviceController {
                 "&port=" + deviceDto.getPort() +
                 "&commandId=" + commandId +
                 "&device=" + deviceDto.getAliasName();
-        if (Arrays.asList(deviceDto.getTypes()).contains("1")) {
+        if (Arrays.asList(deviceDto.getTypes()).contains("1") && deviceDto.getTypes().length == 1) {
             url = "http://rest-service-out/test/do/" +
                     "?ip=" + deviceDto.getIp() +
                     "&commandId=" + commandId;

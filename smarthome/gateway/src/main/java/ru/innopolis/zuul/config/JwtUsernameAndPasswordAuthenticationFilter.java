@@ -1,4 +1,4 @@
-//package ru.innopolis.authService.config;
+//package ru.innopolis.zuul.config;//package ru.innopolis.authService.config;
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import io.jsonwebtoken.Jwts;
