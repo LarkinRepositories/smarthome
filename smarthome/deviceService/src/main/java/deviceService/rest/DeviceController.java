@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+
 @RestController
 @RequestMapping("/")
 @Slf4j
@@ -33,6 +35,11 @@ public class DeviceController {
                 "&port=" + deviceDto.getPort() +
                 "&commandId=" + commandId +
                 "&device=" + deviceDto.getAliasName();
+        if (Arrays.asList(deviceDto.getTypes()).contains("1")) {
+            url = "http://rest-service-out/test/do/" +
+                    "?ip=" + deviceDto.getIp() +
+                    "&commandId=" + commandId;
+        }
         return restTemplate.getForObject(url, String.class);
     }
 
