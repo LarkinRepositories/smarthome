@@ -1,10 +1,11 @@
 package deviceService.mapper;
 
+import deviceService.dto.BaseEntityDto;
 import deviceService.model.BaseEntity;
-import dto.base.BaseEntityDto;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.Objects;
 

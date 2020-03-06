@@ -1,7 +1,6 @@
 package ru.innopolis.mqttService;
 
 
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@Slf4j
 public class MqttController {
     private static final Logger logger = LoggerFactory.getLogger(MqttController.class);
 
@@ -20,17 +18,6 @@ public class MqttController {
     public void mqttDo(@RequestParam(name="ip")String ip, @RequestParam(name="port")int port
             , @RequestParam(name="commandId") Long commandId,@RequestParam(name="device") String device) {
         mqttPub(ip,port,commandId,device);
-    }
-
-
-    @RequestMapping("/test/do-command/")
-    public String doCommand(@RequestParam(name="ip")String ip,
-                            @RequestParam(name="port")Integer port,
-                            @RequestParam(name = "commandId")Long commandId,
-                            @RequestParam(name = "device")String deviceAlias) {
-        mqttPub(ip,port,commandId, deviceAlias);
-        log.info("ip: {}, port: {}. command_id: {} device_alias: {}", ip, port, commandId, deviceAlias);
-        return "DONE";
     }
 
     @RequestMapping("/test/on/")

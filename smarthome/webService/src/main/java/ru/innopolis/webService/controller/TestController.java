@@ -1,7 +1,6 @@
 package ru.innopolis.webService.controller;
 
 import com.google.gson.Gson;
-import dto.deviceservice.entities.DeviceDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import ru.innopolis.webService.device_dto.DeviceDto;
 import ru.innopolis.webService.pojo.User;
 
 import javax.servlet.http.HttpServletRequest;

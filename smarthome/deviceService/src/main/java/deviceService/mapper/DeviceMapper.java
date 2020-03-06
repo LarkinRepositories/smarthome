@@ -1,19 +1,21 @@
 package deviceService.mapper;
 
+import deviceService.dto.BaseEntityDto;
+import deviceService.dto.CommandDto;
+import deviceService.dto.DeviceDto;
+import deviceService.model.BaseEntity;
 import deviceService.model.Command;
 import deviceService.model.Device;
 import deviceService.model.Type;
 import deviceService.repository.CommandRepository;
+import deviceService.repository.DeviceRepository;
 import deviceService.repository.TypeRepository;
-import dto.deviceservice.entities.DeviceDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
