@@ -17,5 +17,7 @@ public class Command extends BaseEntity {
     private Long commandId;
 //    @ManyToMany(mappedBy = "commands", fetch = FetchType.LAZY)
 //    List<Device> devices;
+//    @OneToMany(mappedBy = "command")
+//    List<Signature> signatures;
 
 }

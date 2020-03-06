@@ -24,7 +24,7 @@ public class User extends BaseEntity {
     @Column(name = "chat_id")
     private long chatId;
     @Column(name = "phone")
-    private long phone;
+    private String phone;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id") },
