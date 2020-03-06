@@ -1,4 +1,4 @@
-package ru.innopolis.webService.device_dto;
+package dto.base;
 
 public enum Status {
     ACTIVE,

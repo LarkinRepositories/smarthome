@@ -1,7 +1,6 @@
 package deviceService.service;
 
-import deviceService.dto.DeviceDto;
-import deviceService.model.Device;
+import dto.deviceservice.entities.DeviceDto;
 
 import java.util.List;
 

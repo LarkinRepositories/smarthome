@@ -1,14 +1,10 @@
-package deviceService.dto;
+package dto.deviceservice.entities;
 
-import deviceService.model.Command;
-import deviceService.model.Type;
+import dto.base.BaseEntityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
